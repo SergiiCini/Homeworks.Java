@@ -22,8 +22,8 @@ public class Shooter {
     public static void generateShoot() {
         double ver = Math.random() * 5;
         double hor = Math.random() * 5;
-        userShootData[0] = (int) ver;
-        userShootData[1] = (int) hor;
+        userShootData[0] = (int) ver + 1;
+        userShootData[1] = (int) hor + 1;
         System.out.println(Arrays.toString(userShootData));
     }
 
