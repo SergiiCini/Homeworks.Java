@@ -9,10 +9,6 @@ public class Shooter {
     public static int[] userShootData = new int[2];
 
     public static void main(String[] args) {
-        startGame();
-    }
-
-    public static void startGame() {
         System.out.println("All set. Get ready to rumble!");
         generateShoot();
         showResults();
@@ -42,7 +38,7 @@ public class Shooter {
         return verticalScan.nextInt();
     }
 
-    public static int enteredHorizontalNumber(){
+    public static int enteredHorizontalNumber() {
         Scanner horizontalScan = new Scanner(System.in);
         System.out.print("Enter horizontal shoot parameter: ");
         while (!horizontalScan.hasNextInt()) {
@@ -79,13 +75,13 @@ public class Shooter {
     public static void showResults() {
         for (int i = 0; i < shooterArea.length; i++) {
             for (int j = 0; j < shooterArea.length; j++) {
-                if(i == 0 && j >= 0) {
+                if (i == 0 && j >= 0) {
                     System.out.print(j);
                     System.out.print(shooterArea[i][j] = "");
-                } else if (i > 0 && j ==0) {
+                } else if (i > 0 && j == 0) {
                     System.out.print(i);
                     System.out.print(shooterArea[i][j] = "");
-                } else if (i != 0 && j > 0){
+                } else if (i != 0 && j > 0) {
                     shooterArea[i][j] = "-";
                 }
                 System.out.print(shooterArea[i][j] + "|");
