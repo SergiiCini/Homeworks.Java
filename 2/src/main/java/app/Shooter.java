@@ -11,8 +11,26 @@ public class Shooter {
     public static void main(String[] args) {
         System.out.println("All set. Get ready to rumble!");
         generateShoot();
-        showResults();
+        startGame();
         userInput();
+    }
+
+    public static void startGame() {
+        for (int i = 0; i < shooterArea.length; i++) {
+            for (int j = 0; j < shooterArea.length; j++) {
+                if (i == 0 && j >= 0) {
+                    System.out.print(j);
+                    System.out.print(shooterArea[i][j] = "");
+                } else if (i > 0 && j == 0) {
+                    System.out.print(i);
+                    System.out.print(shooterArea[i][j] = "");
+                } else if (i != 0 && j > 0) {
+                    shooterArea[i][j] = "-";
+                }
+                System.out.print(shooterArea[i][j] + "|");
+            }
+            System.out.println();
+        }
     }
 
     public static void generateShoot() {
@@ -81,8 +99,6 @@ public class Shooter {
                 } else if (i > 0 && j == 0) {
                     System.out.print(i);
                     System.out.print(shooterArea[i][j] = "");
-                } else if (i != 0 && j > 0) {
-                    shooterArea[i][j] = "-";
                 }
                 System.out.print(shooterArea[i][j] + "|");
             }
