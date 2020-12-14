@@ -41,10 +41,6 @@ public class Shooter {
         System.out.println(Arrays.toString(userShootData));
     }
 
-    public static void userInput() {
-        isWin(enteredVerticalNumber(), enteredHorizontalNumber());
-    }
-
     public static int enteredVerticalNumber() {
         Scanner verticalScan = new Scanner(System.in);
         System.out.print("Enter vertical shoot parameter: ");
@@ -66,6 +62,11 @@ public class Shooter {
         }
         return horizontalScan.nextInt();
     }
+
+    public static void userInput() {
+        isWin(enteredVerticalNumber(), enteredHorizontalNumber());
+    }
+
 
     public static boolean checkIfWin(int x, int y) {
         return (userShootData[0] == x && userShootData[1] == y);

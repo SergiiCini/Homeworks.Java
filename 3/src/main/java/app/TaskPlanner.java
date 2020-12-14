@@ -112,5 +112,4 @@ public class TaskPlanner {
         weekSchedule();
         inputScanner();
     }
-
 }
