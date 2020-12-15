@@ -5,30 +5,24 @@ public class Human {
     private String surname;
     private int year;
     private int iq;
-    public Human mother;
-    public Human father;
-    public Pet pet;
     private String[][] schedule;
+    private Family family;
 
     public Human() {
     }
 
-    public Human(String name, String surname, int year, Human mother, Human father) {
+    public Human(String name, String surname, int year) {
         this.name = name;
         this.surname = surname;
         this.year = year;
-        this.mother = mother;
-        this.father = father;
     }
 
-    public Human(String name, String surname, int year, Human mother, Human father, int iq, String[][] schedule) {
+    public Human(String name, String surname, int year, int iq, String[][] schedule) {
         this.name = name;
         this.surname = surname;
         this.year = year;
         this.iq = iq;
         this.schedule = schedule;
-        this.mother = mother;
-        this.father = father;
     }
 
     public void setName(String name) {
@@ -56,15 +50,14 @@ public class Human {
     }
 
     public void setIq(int iq) {
+        if(iq < 0 || iq > 100){
+            throw new IllegalArgumentException("Incorrect range, iq level should be from 0 to 100");
+        }
         this.iq = iq;
     }
 
     public int getIq() {
         return iq;
-    }
-
-    public Pet getPet() {
-        return pet;
     }
 
     public void setSchedule(String[][] schedule) {
@@ -75,17 +68,25 @@ public class Human {
         return schedule;
     }
 
+    public Family getFamily() {
+        return family;
+    }
+
+    public void setFamily(Family family) {
+        this.family = family;
+    }
+
 
     public void greetPet(String petName) {
-        System.out.printf("Привет, %s", pet.getNickname());
+        System.out.printf("Привет, %s", family.getPet().getNickname());
     }
 
     public String checkTrickLevel() {
-        return pet.getTrickLevel() <= 50 ? "очень хитрый" : "почти не хитрый";
+        return family.getPet().getTrickLevel() > 50 ? "очень хитрый" : "почти не хитрый";
     }
 
     public void describePet(String petSpecies, int petAge, int tricksLevel) {
-        System.out.printf("У меня есть %s, ему %d лет, он %s\"", pet.getSpecies(), pet.getAge(), pet.getTrickLevel());
+        System.out.printf("У меня есть %s, ему %d лет, он %s\"", family.getPet().getSpecies(), family.getPet().getAge(), checkTrickLevel());
     }
 
     @Override
@@ -95,9 +96,6 @@ public class Human {
                 ", surname='" + surname + '\'' +
                 ", year=" + year +
                 ", iq=" + iq +
-                ", mother=" + mother.name +
-                ", father=" + father.name +
-                ", pet=" + pet +
                 '}';
     }
 
