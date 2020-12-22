@@ -100,10 +100,9 @@ public class Family {
     public boolean deleteChild(int childId) {
         if (children.length == 0) {
             throw new NoSuchElementException("This family haven't any children yet.");
-        } else if(childId > children.length-1){
+        } else if (childId > children.length - 1) {
             throw new NoSuchElementException("This family haven't this child.");
-        }
-        else {
+        } else {
             Human[] removedChild = new Human[children.length - 1];
             System.arraycopy(children, 0, removedChild, 0, childId);
             if (children.length != childId) {
@@ -114,7 +113,13 @@ public class Family {
         System.out.printf("Child %d was deleted from this family.", childId);
         return true;
     }
-    public int countFamily(){
+
+    public int countFamily() {
         return children.length + 2;
     }
+
+    protected void finalize() throws Throwable {
+        System.out.println("Family object was destroyed.");
+    }
+
 }

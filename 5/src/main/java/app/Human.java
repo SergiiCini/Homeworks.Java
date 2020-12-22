@@ -102,7 +102,9 @@ public class Human {
                 ", schedule=" + Arrays.deepToString(schedule) +
                 '}';
     }
-
+    protected void finalize() throws Throwable {
+        System.out.println("Human object was destroyed.");
+    }
 
 }
 

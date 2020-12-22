@@ -16,7 +16,7 @@ public class Print {
         family.setMother(mother);
 
         Pet pet = new Pet();
-        pet.setSpecies("dog");
+        pet.setSpecies(Species.CAT);
         pet.setNickname("Rock");
         pet.setAge(5);
         pet.setTrickLevel(75);
@@ -28,7 +28,7 @@ public class Print {
 
     public static void showPet() {
         Pet pet = new Pet();
-        pet.setSpecies("dog");
+        pet.setSpecies(Species.DOG);
         pet.setNickname("Rock");
         pet.setAge(5);
         pet.setTrickLevel(75);
@@ -54,7 +54,7 @@ public class Print {
         Family myFamily = new Family(mother, father);
         myFamily.setChildren(new Human[]{son, daughter});
         myFamily.setPet(pet);
-        pet.setSpecies("dog");
+        pet.setSpecies(Species.DOG);
         pet.setNickname("Chester");
         pet.setAge(5);
         pet.setTrickLevel(99);
@@ -65,8 +65,8 @@ public class Print {
 
     public static void newHuman() {
         String[][] schedule1 = {
-                {WeekData.SUNDAY.toString(), "Task for " + WeekData.SUNDAY.toString()},
-                {WeekData.MONDAY.toString(), "Task for " + WeekData.MONDAY.toString()}
+                {WeekData.SUNDAY.name(), "Task for " + WeekData.SUNDAY.name()},
+                {WeekData.MONDAY.name(), "Task for " + WeekData.MONDAY.name()}
         };
         Human Chester = new Human("Chester", "Thompson", 1987, 90, schedule1);
         System.out.println("*****************************************************************************************");
@@ -75,16 +75,16 @@ public class Print {
 
     public static void newFamily() {
         String[][] scheduleSon = {
-                {WeekData.SUNDAY.toString(), "Task for " + WeekData.SUNDAY.toString()},
-                {WeekData.MONDAY.toString(), "Task for " + WeekData.MONDAY.toString()}
+                {WeekData.SUNDAY.name(), "Task for " + WeekData.SUNDAY.name()},
+                {WeekData.MONDAY.name(), "Task for " + WeekData.MONDAY.name()}
         };
         String[][] scheduleDaughter1 = {
-                {WeekData.WEDNESDAY.toString(), "Task for " + WeekData.WEDNESDAY.toString()},
-                {WeekData.MONDAY.toString(), "Task for " + WeekData.MONDAY.toString()}
+                {WeekData.WEDNESDAY.name(), "Task for " + WeekData.WEDNESDAY.name()},
+                {WeekData.MONDAY.name(), "Task for " + WeekData.MONDAY.name()}
         };
         String[][] scheduleDaughter2 = {
-                {WeekData.WEDNESDAY.toString(), "Task for " + WeekData.WEDNESDAY.toString()},
-                {WeekData.SATURDAY.toString(), "Task for " + WeekData.SATURDAY.toString()}
+                {WeekData.WEDNESDAY.name(), "Task for " + WeekData.WEDNESDAY.name()},
+                {WeekData.SATURDAY.name(), "Task for " + WeekData.SATURDAY.name()}
         };
         Human mother = new Human("Jane", "Verno", 1963);
         Human father = new Human("Roberto", "Carlos", 1961);
@@ -93,7 +93,7 @@ public class Print {
         Human daughter2 = new Human("Kate", "Carlos", 1996, 95, scheduleDaughter2);
         Family myNewFamily = new Family(mother, father);
         Pet pet = new Pet();
-        pet.setSpecies("dog");
+        pet.setSpecies(Species.DOG);
         pet.setNickname("Jack");
         pet.setAge(3);
         pet.setTrickLevel(95);
@@ -112,9 +112,12 @@ public class Print {
         myNewFamily.deleteChild(1);
         System.out.println("\n*****************************************************************************************");
         System.out.printf("There are %d people in this family.", myNewFamily.countFamily());
-
-
-
-
+    }
+    public static void GarbageCollectorInit(){
+        Human mother = new Human("Ann", "Cini", 1992);
+        Human father = new Human("Serg", "Cini", 1987);
+        for(int i = 0; i < 1000000; i++){
+            new Family(mother, father);
+        }
     }
 }

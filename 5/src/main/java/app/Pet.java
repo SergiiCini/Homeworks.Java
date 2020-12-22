@@ -3,7 +3,7 @@ package app;
 import java.util.Arrays;
 
 public class Pet {
-    private String species;
+    private Species species;
     private String nickname;
     private int age;
     private int trickLevel;
@@ -12,12 +12,12 @@ public class Pet {
     Pet() {
     }
 
-    Pet(String species, String nickname) {
+    Pet(Species species, String nickname) {
         this.species = species;
         this.nickname = nickname;
     }
 
-    Pet(String species, String nickname, int age, int trickLevel, String[] habits) {
+    Pet(Species species, String nickname, int age, int trickLevel, String[] habits) {
         this.species = species;
         this.nickname = nickname;
         this.age = age;
@@ -25,11 +25,11 @@ public class Pet {
         this.habits = habits;
     }
 
-    public String getSpecies() {
+    public Species getSpecies() {
         return species;
     }
 
-    public void setSpecies(String species) {
+    public void setSpecies(Species species) {
         this.species = species;
     }
 
@@ -89,5 +89,7 @@ public class Pet {
                 ", habits=" + Arrays.toString(habits) +
                 '}';
     }
-
+    protected void finalize() throws Throwable {
+        System.out.println("Pet object was destroyed.");
+    }
 }
