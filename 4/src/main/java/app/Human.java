@@ -1,5 +1,7 @@
 package app;
 
+import java.util.Arrays;
+
 public class Human {
     private String name;
     private String surname;
@@ -73,11 +75,12 @@ public class Human {
     }
 
     public void setFamily(Family family) {
+
         this.family = family;
     }
 
 
-    public void greetPet(String petName) {
+    public void greetPet() {
         System.out.printf("Привет, %s", family.getPet().getNickname());
     }
 
@@ -85,7 +88,7 @@ public class Human {
         return family.getPet().getTrickLevel() > 50 ? "очень хитрый" : "почти не хитрый";
     }
 
-    public void describePet(String petSpecies, int petAge, int tricksLevel) {
+    public void describePet() {
         System.out.printf("У меня есть %s, ему %d лет, он %s\"", family.getPet().getSpecies(), family.getPet().getAge(), checkTrickLevel());
     }
 
@@ -96,6 +99,7 @@ public class Human {
                 ", surname='" + surname + '\'' +
                 ", year=" + year +
                 ", iq=" + iq +
+                ", schedule=" + Arrays.deepToString(schedule) +
                 '}';
     }
 
