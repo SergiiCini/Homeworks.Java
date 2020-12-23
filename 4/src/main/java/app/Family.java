@@ -14,6 +14,7 @@ public class Family {
     static int childrenAm = 0;
 
     public Family(Human mother, Human father) {
+        childrenAm = 0;
         this.mother = mother;
         this.father = father;
         this.children = new Human[childrenAm];

@@ -8,6 +8,7 @@ public class Main {
         Print.showFamily();
         Print.newHuman();
         Print.newFamily();
+        Print.TestFamily();
 //        Print.GarbageCollectorInit();
     }
 }

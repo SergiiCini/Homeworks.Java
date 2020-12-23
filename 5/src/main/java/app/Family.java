@@ -12,8 +12,10 @@ public class Family {
     private Pet pet;
 
     static int childrenAm = 0;
+    static int pos = 0;
 
     public Family(Human mother, Human father) {
+        childrenAm = 0;
         this.mother = mother;
         this.father = father;
         this.children = new Human[childrenAm];
@@ -83,6 +85,32 @@ public class Family {
         return Objects.equals(mother, family.mother) && Objects.equals(father, family.father) && Arrays.equals(children, family.children) && Objects.equals(pet, family.pet);
     }
 
+//    private void resize() {
+//        // according to the task initial size of children array should be 0.
+//        if (childrenAm == 0) {
+//            childrenAm = 1;
+//            children = new Human[childrenAm];
+//            return;
+//        }
+//
+//        childrenAm = childrenAm + 1;
+//        Human[] resizedChildrenArr = new Human[childrenAm];
+//        System.arraycopy(children, 0, resizedChildrenArr, 0, children.length);
+//        children = resizedChildrenArr;
+//
+//    }
+//
+//    private void resizeIfNeed() {
+//        if (pos == childrenAm) resize();
+//    }
+//
+//    public void addChild(Human child) {
+//        child.setFamily(this);
+//        resizeIfNeed();
+//        this.children[pos++] = child;
+//    }
+
+
     public void addChild(Human child) {
         child.setFamily(this);
         if (childrenAm == 0) {
@@ -95,6 +123,7 @@ public class Family {
         }
         children = addedChildren;
         children[childrenAm - 1] = child;
+        System.out.println("children: " + Arrays.toString(this.children));
     }
 
     public boolean deleteChild(int childId) {
