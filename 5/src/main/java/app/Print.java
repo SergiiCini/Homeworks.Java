@@ -109,7 +109,8 @@ public class Print {
         System.out.println("*****************************************************************************************");
         System.out.println(myNewFamily.toString());
         System.out.println("*****************************************************************************************");
-        myNewFamily.deleteChild(1);
+//        myNewFamily.deleteChild(1);
+        myNewFamily.deleteChildByObj(daughter2);
         System.out.println("\n*****************************************************************************************");
         System.out.printf("There are %d people in this family.", myNewFamily.countFamily());
         System.out.println("\n*****************************************************************************************");

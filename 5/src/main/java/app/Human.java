@@ -75,7 +75,6 @@ public class Human {
     }
 
     public void setFamily(Family family) {
-
         this.family = family;
     }
 

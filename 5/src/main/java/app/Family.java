@@ -96,7 +96,6 @@ public class Family {
         }
         children = addedChildren;
         children[childrenAm - 1] = child;
-        System.out.println("children: " + Arrays.toString(this.children));
     }
 
     public boolean deleteChild(int childId) {
@@ -113,6 +112,27 @@ public class Family {
             children = removedChild;
         }
         System.out.printf("Child %d was deleted from this family.", childId);
+        return true;
+    }
+
+    public boolean deleteChildByObj(Human child){
+        if (children.length == 0) {
+            throw new NoSuchElementException("This family haven't any children yet.");
+        }
+        for(int i = 0; i<children.length; i++) {
+            if(children[i].getName().equals(child.getName())) {
+                Human[] removedChild = new Human[children.length - 1];
+                System.arraycopy(children, 0, removedChild, 0, i);
+                if (children.length != i) {
+                    System.arraycopy(children, i + 1, removedChild, i, children.length - i - 1);
+                }
+                children = removedChild;
+            }
+            else {
+                System.out.println("This family doesn't have children with this name.");
+            }
+        }
+        System.out.printf("\nChild %s was deleted from this family.", child.getName());
         return true;
     }
 
