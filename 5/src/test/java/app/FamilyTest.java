@@ -3,8 +3,6 @@ package app;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Array;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class FamilyTest {
@@ -68,8 +66,33 @@ class FamilyTest {
     }
 
     @Test
-    void testDeleteChildMethod(){
+    void testDeleteChildMethod() {
+        System.out.println("DeleteChild by obj method testing...");
+        int initialArrayLength = newFamily.getChildren().length;
+        assertEquals(child1.getFamily(), newFamily);
 
+        newFamily.deleteChildByObj(child1);
+        int arrayAfterDeletingChild = newFamily.getChildren().length;
+        assertEquals(arrayAfterDeletingChild, initialArrayLength - 1);
+
+        newFamily.deleteChildByObj(child2);
+        arrayAfterDeletingChild = newFamily.getChildren().length;
+        assertEquals(arrayAfterDeletingChild, initialArrayLength - 2);
+    }
+
+    @Test
+    void testDeleteChildByIdMethod(){
+        System.out.println("DeleteChild method by id testing...");
+        int initialArrayLength = newFamily.getChildren().length;
+        assertEquals(child1.getFamily(), newFamily);
+
+        newFamily.deleteChild(1);
+        int arrayAfterDeletingChild = newFamily.getChildren().length;
+        assertEquals(arrayAfterDeletingChild, initialArrayLength - 1);
+
+        newFamily.deleteChild(0);
+        arrayAfterDeletingChild = newFamily.getChildren().length;
+        assertEquals(arrayAfterDeletingChild, initialArrayLength - 2);
     }
 
     @Test
@@ -81,13 +104,11 @@ class FamilyTest {
         newFamily.addChild(child4);
         assertEquals(child4.getFamily(), newFamily);
         assertEquals(newFamily.getChildren().length, initialArrayLength + 1);
-
-
     }
 
     @Test
     void testCountFamilyMethod() {
-        System.out.println("CountFamily method testing...");
+        System.out.println("\nCountFamily method testing...");
         newFamily.addChild(child1);
         newFamily.addChild(child1);
 //        System.out.println("NewFamily amount is: " + newFamily.countFamily());

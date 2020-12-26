@@ -110,8 +110,8 @@ public class Family {
                 System.arraycopy(children, childId + 1, removedChild, childId, children.length - childId - 1);
             }
             children = removedChild;
+            System.out.printf("\nChild %d was deleted from this family.", childId);
         }
-        System.out.printf("Child %d was deleted from this family.", childId);
         return true;
     }
 
@@ -127,12 +127,11 @@ public class Family {
                     System.arraycopy(children, i + 1, removedChild, i, children.length - i - 1);
                 }
                 children = removedChild;
-            }
-            else {
-                System.out.println("This family doesn't have children with this name.");
+                System.out.printf("\nChild %s was deleted from this family.", child.getName());
+            } else if(!children[i].getName().equals(child.getName())) {
+                System.out.printf("\n%s doesn't belong to this family!", child.getName());
             }
         }
-        System.out.printf("\nChild %s was deleted from this family.", child.getName());
         return true;
     }
 
