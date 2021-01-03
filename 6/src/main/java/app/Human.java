@@ -8,15 +8,16 @@ abstract public class Human {
     private int year;
     private int iq;
     private String[][] schedule;
-    private Family family;
+    protected Family family;
 
     public Human() {
     }
 
-    public Human(String name, String surname, int year) {
+    public Human(String name, String surname, int year, int iq) {
         this.name = name;
         this.surname = surname;
         this.year = year;
+        this.iq = iq;
     }
 
     public Human(String name, String surname, int year, int iq, String[][] schedule) {

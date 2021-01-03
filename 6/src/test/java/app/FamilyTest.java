@@ -7,10 +7,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FamilyTest {
     private Family newFamily;
-    private Human child1;
-    private Human child2;
-    private Human child3;
-    private Human child4;
+    private Man child1;
+    private Man child2;
+    private Woman child3;
+    private Man child4;
 
     @BeforeEach
     void createDataToTest() {
@@ -30,22 +30,19 @@ class FamilyTest {
                 {WeekData.THURSDAY.name(), "Task for " + WeekData.THURSDAY.name()},
                 {WeekData.WEDNESDAY.name(), "Task for " + WeekData.WEDNESDAY.name()}
         };
-        Human mother = new Human("Kate", "Middletone", 54, 80, schedule1);
-        Human father = new Human("Michael", "Kors", 56, 60, schedule2);
-        child1 = new Human("Sergio", "Kors", 25, 90, schedule4);
-        child2 = new Human("Alex", "Kors", 21, 90, schedule3);
-        child3 = new Human("Jane", "Kors", 20, 80, schedule1);
-        child4 = new Human("Jack", "Kors", 28, 99, schedule4);
+        Woman mother = new Woman("Kate", "Middletone", 54, 80, schedule1);
+        Man father = new Man("Michael", "Kors", 56, 60, schedule2);
+        child1 = new Man("Sergio", "Kors", 25, 90, schedule4);
+        child2 = new Man("Alex", "Kors", 21, 90, schedule3);
+        child3 = new Woman("Jane", "Kors", 20, 80, schedule1);
+        child4 = new Man("Jack", "Kors", 28, 99, schedule4);
 
         newFamily = new Family(mother, father);
         newFamily.addChild(child1);
         newFamily.addChild(child2);
         newFamily.addChild(child3);
 
-        Pet newPet = new Pet(Species.DOG, "Chester");
-        newPet.setAge(3);
-        newPet.setTrickLevel(90);
-        newPet.setHabits(new String[]{"eat", "drink", "sleep"});
+        Dog newPet = new Dog("Chester", 3, 90, new String[]{"eat", "drink", "sleep"});
         newFamily.setPet(newPet);
     }
 
