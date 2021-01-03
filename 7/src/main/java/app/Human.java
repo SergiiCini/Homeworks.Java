@@ -1,13 +1,15 @@
 package app;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 abstract public class Human {
     private String name;
     private String surname;
     private int year;
     private int iq;
-    private String[][] schedule;
+    private HashMap<WeekData, String> schedule;
     protected Family family;
 
     public Human() {
@@ -20,7 +22,7 @@ abstract public class Human {
         this.iq = iq;
     }
 
-    public Human(String name, String surname, int year, int iq, String[][] schedule) {
+    public Human(String name, String surname, int year, int iq, HashMap<WeekData, String> schedule) {
         this.name = name;
         this.surname = surname;
         this.year = year;
@@ -63,11 +65,11 @@ abstract public class Human {
         return iq;
     }
 
-    public void setSchedule(String[][] schedule) {
+    public void setSchedule(HashMap<WeekData, String> schedule) {
         this.schedule = schedule;
     }
 
-    public String[][] getSchedule() {
+    public HashMap<WeekData, String> getSchedule() {
         return schedule;
     }
 
@@ -90,6 +92,16 @@ abstract public class Human {
         System.out.printf("У меня есть %s, ему %d лет, он %s\"", family.getPet().getSpecies(), family.getPet().getAge(), checkTrickLevel());
     }
 
+    public String scheduleToDisplay(){
+        HashMap <WeekData, String> personalSchedule = new HashMap<>();
+        personalSchedule.putAll(schedule);
+        String scheduleString = "";
+        for(Map.Entry<WeekData, String> entry : personalSchedule.entrySet()) {
+            scheduleString = "[" + scheduleString + entry.getKey() + ", " + entry.getValue() + "]";
+        }
+        return scheduleString;
+    }
+
     @Override
     public String toString() {
         return "Human{" +
@@ -97,7 +109,7 @@ abstract public class Human {
                 ", surname='" + surname + '\'' +
                 ", year=" + year +
                 ", iq=" + iq +
-                ", schedule=" + Arrays.deepToString(schedule) +
+                ", schedule=" + scheduleToDisplay() +
                 '}';
     }
     protected void finalize() throws Throwable {

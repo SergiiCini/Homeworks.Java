@@ -48,7 +48,7 @@ public class Print {
     }
 
     public static void newFamily() {
-        String[][] scheduleSon = {
+        HashMap<WeekData, String> scheduleSon = {
                 {WeekData.SUNDAY.name(), "Task for " + WeekData.SUNDAY.name()},
                 {WeekData.MONDAY.name(), "Task for " + WeekData.MONDAY.name()}
         };

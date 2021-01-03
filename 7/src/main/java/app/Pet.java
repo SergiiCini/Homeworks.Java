@@ -1,13 +1,14 @@
 package app;
 
 import java.util.Arrays;
+import java.util.HashSet;
 
 abstract class Pet {
     Species species;
     String nickname;
     int age;
     int trickLevel;
-    String[] habits;
+    private HashSet<String> habits;
 
     public Pet() {
     }
@@ -16,7 +17,7 @@ abstract class Pet {
         this.nickname = nickname;
     }
 
-    public Pet(String nickname, int age, int trickLevel, String[] habits) {
+    public Pet(String nickname, int age, int trickLevel, HashSet<String> habits) {
         this.nickname = nickname;
         this.age = age;
         this.trickLevel = trickLevel;
@@ -59,11 +60,11 @@ abstract class Pet {
         this.trickLevel = trickLevel;
     }
 
-    public String[] getHabits() {
+    public HashSet<String> getHabits() {
         return habits;
     }
 
-    public void setHabits(String[] habits) {
+    public void setHabits(HashSet<String> habits) {
         this.habits = habits;
     }
 
@@ -79,7 +80,7 @@ abstract class Pet {
                 "nickname='" + getNickname() + '\'' +
                 ", age=" + age +
                 ", trickLevel=" + getTrickLevel() +
-                ", habits=" + Arrays.toString(habits) +
+                ", habits=" + habits.toString() +
                 '}';
     }
 
