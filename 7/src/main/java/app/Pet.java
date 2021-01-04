@@ -1,7 +1,7 @@
 package app;
 
-import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Objects;
 
 abstract class Pet {
     Species species;
@@ -86,5 +86,18 @@ abstract class Pet {
 
     protected void finalize() throws Throwable {
         System.out.println("Pet object was destroyed.");
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Pet)) return false;
+        Pet pet = (Pet) o;
+        return age == pet.age && trickLevel == pet.trickLevel && species == pet.species && nickname.equals(pet.nickname) && habits.equals(pet.habits);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(species, nickname, age, trickLevel, habits);
     }
 }

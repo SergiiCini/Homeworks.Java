@@ -9,6 +9,7 @@ public class Main {
         Print.newHuman();
         Print.newFamily();
         Print.TestFamily();
+
 //        Print.GarbageCollectorInit();
     }
 }

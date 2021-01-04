@@ -1,12 +1,14 @@
 package app;
 
+import java.util.HashMap;
+
 public final class Woman extends Human {
 
     public Woman(String name, String surname, int year, int iq){
         super(name, surname, year, iq);
     }
 
-    public Woman(String name, String surname, int year, int iq, String[][] schedule){
+    public Woman(String name, String surname, int year, int iq, HashMap<WeekData, String> schedule){
         super(name, surname, year, iq, schedule);
     }
 

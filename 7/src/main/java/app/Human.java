@@ -1,8 +1,8 @@
 package app;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 abstract public class Human {
     private String name;
@@ -95,10 +95,12 @@ abstract public class Human {
     public String scheduleToDisplay(){
         HashMap <WeekData, String> personalSchedule = new HashMap<>();
         personalSchedule.putAll(schedule);
-        String scheduleString = "";
+        String scheduleString = "[";
         for(Map.Entry<WeekData, String> entry : personalSchedule.entrySet()) {
-            scheduleString = "[" + scheduleString + entry.getKey() + ", " + entry.getValue() + "]";
+            scheduleString = scheduleString + "[" + entry.getKey() + ", " + entry.getValue() + "]" + ", ";
         }
+        scheduleString = scheduleString.substring(0, scheduleString.length()-2);
+        scheduleString = scheduleString + "]";
         return scheduleString;
     }
 
@@ -116,5 +118,17 @@ abstract public class Human {
         System.out.println("Human object was destroyed.");
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Human)) return false;
+        Human human = (Human) o;
+        return year == human.year && iq == human.iq && name.equals(human.name) && surname.equals(human.surname) && schedule.equals(human.schedule) && family.equals(human.family);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, surname, year, iq, schedule, family);
+    }
 }
 

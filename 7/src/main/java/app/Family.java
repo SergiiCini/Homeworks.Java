@@ -63,19 +63,23 @@ public class Family {
         Family.childrenAm = childrenAm;
     }
 
+    public String childrenString(){
+        String childrenLine = "";
+        for (Human child : children) {
+            System.out.println(child);
+            childrenLine += child.toString() + ';';
+            if (children.indexOf(child) != children.size()) childrenLine += "\n";
+        }
+        return childrenLine;
+    }
+
     @Override
     public String toString() {
-        String childrenString = "";
-        for (Human child : children) {
-            childrenString += child.toString() + ';';
-            if (children.indexOf(child) != children.size() - 1) childrenString += "\n";
-        }
-
-        return "Family:" +
+             return "Family:" +
                 "\nmother=" + mother.getName() + " " + mother.getSurname() +
                 ", \nfather=" + father.getName() + " " + father.getSurname() +
-                ", \nchildren:" + "\n" + childrenString +
-                ", \npet:" + "\n" + pet;
+                ", \nchildren:" + "\n" + childrenString() +
+                "pet:" + "\n" + pet;
     }
 
     @Override
