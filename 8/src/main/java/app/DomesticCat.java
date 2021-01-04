@@ -16,6 +16,5 @@ public class DomesticCat extends Pet implements Foul {
 
     @Override
     public void respond(String nickname) {
-
     }
 }
