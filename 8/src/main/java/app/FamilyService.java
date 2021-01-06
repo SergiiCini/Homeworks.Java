@@ -82,7 +82,6 @@ public class FamilyService {
     }
 
     public Family bornChild(Family family, String sonsName, String daughterName) {
-        //born child
         Human father = family.getFather();
         String surname = father.getSurname();
         int barthYear = LocalDate.now().getYear();
@@ -104,10 +103,44 @@ public class FamilyService {
         }
     }
 
-    public Family adoptChild(Family family, Human child){
+    public Family adoptChild(Family family, Human child) {
         family.addChild(child);
         familyDao.saveFamily(family);
         return family;
+    }
+
+    public void deleteAllChildrenOlderThen(int year) {
+        List<Family> allFamilies = getAllFamilies();
+        List<Human> children = new ArrayList<>();
+        for (Family family : allFamilies) {
+            children = family.getChildren();
+            for (Human child : children) {
+                int currentAge = LocalDate.now().getYear() - child.getYear();
+                if (currentAge > year) {
+                    family.deleteChildByObj(child);
+                    familyDao.saveFamily(family);
+                }
+            }
+        }
+    }
+
+    public int count() {
+        return getAllFamilies().size();
+    }
+
+    public Family getFamilyById(int familyIndex) {
+        return familyDao.getFamilyByIndex(familyIndex);
+    }
+
+    public Pet getPet(int familyIndex){
+        if (familyIndex > getAllFamilies().size()) {
+            System.out.println("No family with entered index...");
+            return null;
+        } else {
+            Family family = familyDao.getFamilyByIndex(familyIndex);
+            return family.getPet();
+        }
+
     }
 
 
