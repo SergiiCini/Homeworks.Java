@@ -1,6 +1,7 @@
 package app;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
 
@@ -55,7 +56,7 @@ abstract public class Human {
     }
 
     public void setIq(int iq) {
-        if(iq < 0 || iq > 100){
+        if (iq < 0 || iq > 100) {
             throw new IllegalArgumentException("Incorrect range, iq level should be from 0 to 100");
         }
         this.iq = iq;
@@ -81,25 +82,27 @@ abstract public class Human {
         this.family = family;
     }
 
+//    abstract public void greetPet();
 
-    abstract public void greetPet();
+    abstract public void greetPet(int petIndex);
 
-    public String checkTrickLevel() {
-        return family.getPet().getTrickLevel() > 50 ? "очень хитрый" : "почти не хитрый";
+    public String checkTrickLevel(int petIndex) {
+        Pet pet = family.getPet().get(petIndex);
+        return pet.getTrickLevel() > 50 ? "очень хитрый" : "почти не хитрый";
     }
 
-    public void describePet() {
-        System.out.printf("У меня есть %s, ему %d лет, он %s\"", family.getPet().getSpecies(), family.getPet().getAge(), checkTrickLevel());
+    public void describePet(int petIndex) {
+        System.out.printf("У меня есть %s, ему %d лет, он %s\"", family.getSomePet(petIndex).getSpecies(), family.getSomePet(petIndex).getAge(), checkTrickLevel(petIndex));
     }
 
-    public String scheduleToDisplay(){
-        HashMap <WeekData, String> personalSchedule = new HashMap<>();
+    public String scheduleToDisplay() {
+        HashMap<WeekData, String> personalSchedule = new HashMap<>();
         personalSchedule.putAll(schedule);
         String scheduleString = "[";
-        for(Map.Entry<WeekData, String> entry : personalSchedule.entrySet()) {
+        for (Map.Entry<WeekData, String> entry : personalSchedule.entrySet()) {
             scheduleString = scheduleString + "[" + entry.getKey() + ", " + entry.getValue() + "]" + ", ";
         }
-        scheduleString = scheduleString.substring(0, scheduleString.length()-2);
+        scheduleString = scheduleString.substring(0, scheduleString.length() - 2);
         scheduleString = scheduleString + "]";
         return scheduleString;
     }
@@ -111,9 +114,10 @@ abstract public class Human {
                 ", surname='" + surname + '\'' +
                 ", year=" + year +
                 ", iq=" + iq +
-                ", schedule=" + scheduleToDisplay() +
+//                ", schedule=" + scheduleToDisplay() +
                 '}';
     }
+
     protected void finalize() throws Throwable {
         System.out.println("Human object was destroyed.");
     }

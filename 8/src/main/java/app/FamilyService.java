@@ -1,7 +1,5 @@
 package app;
 
-import jdk.vm.ci.meta.Local;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +83,7 @@ public class FamilyService {
         Human father = family.getFather();
         String surname = father.getSurname();
         int barthYear = LocalDate.now().getYear();
-        int childGenderProbability = (int) Math.floor(Math.random());
+        int childGenderProbability = (int) Math.round(Math.random());
         String childGender = (childGenderProbability == 1) ? "Boy" : "Girl";
         switch (childGender) {
             case "Boy":
@@ -99,6 +97,7 @@ public class FamilyService {
                 familyDao.saveFamily(family);
                 return family;
             default:
+                System.out.println("I'm in default");
                 return null;
         }
     }
@@ -110,15 +109,15 @@ public class FamilyService {
     }
 
     public void deleteAllChildrenOlderThen(int year) {
-        List<Family> allFamilies = getAllFamilies();
-        List<Human> children = new ArrayList<>();
+        List<Family> allFamilies = familyDao.getAllFamilies();
         for (Family family : allFamilies) {
-            children = family.getChildren();
+            List<Human> children = family.getChildren();
             for (Human child : children) {
                 int currentAge = LocalDate.now().getYear() - child.getYear();
                 if (currentAge > year) {
                     family.deleteChildByObj(child);
                     familyDao.saveFamily(family);
+                    break;
                 }
             }
         }
@@ -132,17 +131,30 @@ public class FamilyService {
         return familyDao.getFamilyByIndex(familyIndex);
     }
 
-    public Pet getPet(int familyIndex){
+    public ArrayList<Pet> getPet(int familyIndex) {
+        ArrayList<Pet> pets = new ArrayList<>();
         if (familyIndex > getAllFamilies().size()) {
             System.out.println("No family with entered index...");
             return null;
         } else {
             Family family = familyDao.getFamilyByIndex(familyIndex);
+            if (family.getPet().size() == 0) {
+                System.out.print("No pets in this family");
+            }
             return family.getPet();
         }
-
     }
 
+    public boolean addPet(int familyIndex, Pet pet) {
+        if (familyIndex > getAllFamilies().size()) {
+            System.out.println("No family with entered index...");
+            return false;
+        }
+        Family family = familyDao.getFamilyByIndex(familyIndex);
+        family.addPet(pet);
+        familyDao.saveFamily(family);
+        return true;
+    }
 
 
 }

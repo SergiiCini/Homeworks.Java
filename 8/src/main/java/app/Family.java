@@ -1,16 +1,13 @@
 package app;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.NoSuchElementException;
-import java.util.Objects;
+import java.util.*;
 
 public class Family {
 
     private Human mother;
     private Human father;
     private ArrayList<Human> children;
-    private Pet pet;
+    private ArrayList<Pet> pets;
 
     static int childrenAm = 0;
 
@@ -21,6 +18,7 @@ public class Family {
         this.children = new ArrayList<>();
         mother.setFamily(this);
         father.setFamily(this);
+        this.pets = new ArrayList<>();
     }
 
     public Human getMother() {
@@ -47,12 +45,23 @@ public class Family {
         this.children = children;
     }
 
-    public Pet getPet() {
-        return pet;
+    public ArrayList<Pet> getPet() {
+        return pets;
     }
 
-    public void setPet(Pet pet) {
-        this.pet = pet;
+    public Pet getSomePet(int petIndex) {
+        return pets.get(petIndex);
+    }
+
+    public void setPet(ArrayList<Pet> pets) {
+        this.pets = pets;
+    }
+
+    public void addPet(Pet pet) {
+        if (pets.contains(pet)) {
+            System.out.println("This family has had this pet already!");
+        }
+        pets.add(pet);
     }
 
     public int getChildrenAm() {
@@ -63,10 +72,10 @@ public class Family {
         Family.childrenAm = childrenAm;
     }
 
-    public String childrenString(){
+    public String childrenString() {
         String childrenLine = "";
         for (Human child : children) {
-            System.out.println(child);
+//            System.out.println(child);
             childrenLine += child.toString() + ';';
             if (children.indexOf(child) != children.size()) childrenLine += "\n";
         }
@@ -75,11 +84,11 @@ public class Family {
 
     @Override
     public String toString() {
-             return "Family:" +
+        return "Family:" +
                 "\nmother=" + mother.getName() + " " + mother.getSurname() +
                 ", \nfather=" + father.getName() + " " + father.getSurname() +
                 ", \nchildren:" + "\n" + childrenString() +
-                "pet:" + "\n" + pet;
+                "pet:" + "\n" + pets;
     }
 
     @Override
@@ -110,7 +119,7 @@ public class Family {
     }
 
     public boolean deleteChildByObj(Human child) {
-        if (children.size()== 0) {
+        if (children.size() == 0) {
             throw new NoSuchElementException("This family haven't any children yet.");
         }
         int childIndex = children.indexOf(child);

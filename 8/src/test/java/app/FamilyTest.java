@@ -48,7 +48,7 @@ class FamilyTest {
         newFamily.addChild(child3);
 
         Dog newPet = new Dog("Chester", 3, 90, new HashSet<>(Arrays.asList("eat", "drink", "sleep")));
-        newFamily.setPet(newPet);
+        newFamily.addPet(newPet);
     }
 
     @Test
@@ -63,8 +63,8 @@ class FamilyTest {
                         "Human{name='Alex', surname='Kors', year=21, iq=90, schedule=[[WEDNESDAY, Task for WEDNESDAY], [SATURDAY, Task for SATURDAY]]};\n" +
                         "Human{name='Jane', surname='Kors', year=20, iq=80, schedule=[[MONDAY, Task for MONDAY], [SUNDAY, Task for SUNDAY]]};\n" +
                         "pet:\n" +
-                        "DOG{nickname='Chester', age=3, trickLevel=90, habits=[sleep, eat, drink]}";
-        assertEquals(newFamily.toString(), expectedPrint);
+                        "[DOG{nickname='Chester', age=3, trickLevel=90, habits=[sleep, eat, drink]}]";
+        assertEquals(expectedPrint, newFamily.toString());
     }
 
     @Test
