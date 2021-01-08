@@ -35,7 +35,6 @@ public class FamilyService {
         List<Family> allFamilies = getAllFamilies();
         for (Family family : allFamilies) {
             if (family.countFamily() > numberOfFamilyMembers) {
-                assert false;
                 filteredFamilies.add(family);
             }
         }
@@ -48,7 +47,6 @@ public class FamilyService {
         List<Family> allFamilies = getAllFamilies();
         for (Family family : allFamilies) {
             if (family.countFamily() < numberOfFamilyMembers) {
-                assert false;
                 filteredFamilies.add(family);
             }
         }
@@ -112,12 +110,11 @@ public class FamilyService {
         List<Family> allFamilies = familyDao.getAllFamilies();
         for (Family family : allFamilies) {
             List<Human> children = family.getChildren();
-            for (Human child : children) {
-                int currentAge = LocalDate.now().getYear() - child.getYear();
+            for (int i = 0; i < children.size(); i++) {
+                int currentAge = LocalDate.now().getYear() - children.get(i).getYear();
                 if (currentAge > year) {
-                    family.deleteChildByObj(child);
+                    family.deleteChildByObj(children.get(i));
                     familyDao.saveFamily(family);
-                    break;
                 }
             }
         }

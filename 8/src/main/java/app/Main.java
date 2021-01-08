@@ -49,10 +49,8 @@ public class Main {
         familyController.bornChild(newFamily1, "Sam", "Samanta");
         familyController.bornChild(newFamily2, "Ivan", "Vera");
 
-
 //        Print.TestFamily();
         System.out.println("*******************************************************************************");
-
         System.out.println("1. Checking getAllFamilies(): ");
         List<Family> allFamilies = familyController.getAllFamilies();
         System.out.printf("Number of families: %d", allFamilies.size());
@@ -75,7 +73,6 @@ public class Main {
         System.out.println("5. Checking countFamiliesWithMemberNumber(): ");
         //there are 5 people in our family
         familyController.countFamiliesWithMemberNumber(2);
-        System.out.println("*******************************************************************************");
         System.out.println("*******************************************************************************");
 
         System.out.println("6. Checking createNewFamily(): ");
@@ -100,7 +97,7 @@ public class Main {
         System.out.println("*******************************************************************************");
 
         System.out.println("10. Checking deleteAllChildrenOlderThen(): ");
-        familyController.deleteAllChildrenOlderThen(3);
+        familyController.deleteAllChildrenOlderThen(5);
         System.out.println(familyController.getAllFamilies());
         System.out.println("*******************************************************************************");
 

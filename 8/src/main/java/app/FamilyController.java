@@ -65,7 +65,7 @@ public class FamilyController implements FamilyServiceDao {
 
     @Override
     public void deleteAllChildrenOlderThen(int year) {
-familyService.deleteAllChildrenOlderThen(year);
+        familyService.deleteAllChildrenOlderThen(year);
     }
 
     @Override

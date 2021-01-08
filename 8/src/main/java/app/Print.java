@@ -39,11 +39,7 @@ public class Print {
         newFamily.addPet(pet2);
         newFamily.addPet(pet3);
         System.out.println(newFamily.toString());
-
-
     }
-
-
 
     public static void GarbageCollectorInit() {
         Woman mother = new Woman("Ann", "Cini", 1992, 85);
