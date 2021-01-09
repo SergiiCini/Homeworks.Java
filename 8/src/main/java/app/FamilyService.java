@@ -59,7 +59,6 @@ public class FamilyService {
         List<Family> allFamilies = getAllFamilies();
         for (Family family : allFamilies) {
             if (family.countFamily() == numberOfFamilyMembers) {
-                assert false;
                 filteredFamilies.add(family);
             }
         }
@@ -85,7 +84,7 @@ public class FamilyService {
         String childGender = (childGenderProbability == 1) ? "Boy" : "Girl";
         switch (childGender) {
             case "Boy":
-                Man son = new Man(sonsName, surname, barthYear, 0);
+                Man son = new Man(sonsName, surname, barthYear, 5);
                 family.addChild(son);
                 familyDao.saveFamily(family);
                 return family;
@@ -115,7 +114,9 @@ public class FamilyService {
                 if (currentAge > year) {
                     family.deleteChildByObj(children.get(i));
                     familyDao.saveFamily(family);
+
                 }
+
             }
         }
     }
