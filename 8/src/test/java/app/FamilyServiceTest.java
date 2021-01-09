@@ -64,6 +64,7 @@ class FamilyServiceTest {
     void getAllFamilies() {
         System.out.println("Testing getAllFamilies():");
         assertEquals(3, familyController.getAllFamilies().size());
+        System.out.println("Ok!");
     }
 
     @Test
@@ -71,6 +72,7 @@ class FamilyServiceTest {
         System.out.println("Testing displayAllFamilies():");
         familyController.deleteFamilyByIndex(0);
         assertEquals(2, familyController.getAllFamilies().size());
+        System.out.println("Ok!");
     }
 
     @Test
@@ -81,6 +83,7 @@ class FamilyServiceTest {
         familyList.add(family3);
         List<Family> filteredFamilies = familyController.getFamiliesBiggerThan(5);
         assertEquals(familyList, filteredFamilies);
+        System.out.println("Ok!");
     }
 
     @Test
@@ -91,12 +94,14 @@ class FamilyServiceTest {
         familyList.add(family2);
         List<Family> filteredFamilies = familyController.getFamiliesLessThan(4);
         assertEquals(familyList, filteredFamilies);
+        System.out.println("Ok!");
     }
 
     @Test
     void countFamiliesWithMemberNumber() {
         System.out.println("Testing countFamiliesWithMemberNumber():");
         assertEquals(1, familyController.countFamiliesWithMemberNumber(6));
+        System.out.println("Ok!");
     }
 
     @Test
@@ -114,6 +119,7 @@ class FamilyServiceTest {
         Man father = new Man("Michael", "Kors", 1956, 60, schedule4);
         Family newFamily = familyController.createNewFamily(mother, father);
         assertTrue(familyController.getAllFamilies().contains(newFamily));
+        System.out.println("Ok!");
     }
 
     @Test
@@ -129,6 +135,7 @@ class FamilyServiceTest {
         familyController.deleteFamilyByIndex(0);
         newFamiliesAmount = families.size();
         assertEquals(1, newFamiliesAmount);
+        System.out.println("Ok!");
     }
 
     @Test
@@ -141,6 +148,7 @@ class FamilyServiceTest {
         familyController.bornChild(family2, "Antonio", "Lara");
         int newChildrenAm = children.size();
         assertEquals(initialChildrenAm + 1, newChildrenAm);
+        System.out.println("Ok!");
     }
 
     @Test
@@ -150,35 +158,83 @@ class FamilyServiceTest {
         Man child = new Man("Muhamed", "Chaker", 1985, 55);
         familyController.adoptChild(family1, child);
         assertTrue(family1.getChildren().contains(child));
+        System.out.println("Ok!");
     }
 
     @Test
     void deleteAllChildrenOlderThen() {
-        // there is a child in family3 that was born in 1987, so now he is 34.
-        Man child = new Man("Monika", "Stone", 1987, 60);
-
+        System.out.println("Testing deleteAllChildrenOlderThen():");
         ArrayList<Family> families = (ArrayList<Family>) familyController.getAllFamilies();
+        // there is only one child in family3 that was born in 1987, so now he is 34 y.o..
         Family family3 = families.get(2);
-        System.out.println(family3);
-        assertTrue(family3.getChildren().contains(child));
+        //initial number of children are 4;
+        int initialChildrenAm = family3.getChildren().size();
+        // deleting children older then 33 y.o.
         familyController.deleteAllChildrenOlderThen(33);
-        System.out.println(family3);
-//        assertFalse(family3.getChildren().contains(child));
+        //amount of children after deleting are 3;
+        int newChildrenAm = family3.getChildren().size();
+        assertEquals(initialChildrenAm - 1, newChildrenAm);
+        System.out.println("Ok!");
     }
 
     @Test
     void count() {
+        System.out.println("Testing count():");
+        ArrayList<Family> families = (ArrayList<Family>) familyController.getAllFamilies();
+        Family family3 = families.get(2);
+        //there are 3 families.
+        int initialFamiliesAm = families.size();
+        // let's delete the family3 (index of this family is 2)
+        familyController.deleteFamilyByIndex(2);
+        //there are 2 families after deleting family with index 2 (family3);
+        int newFamiliesAm = families.size();
+        //let's check that the number of families was decreased by 1 after deleting
+        assertEquals(initialFamiliesAm - 1, newFamiliesAm);
+        //let's check that there isn't family3 in families ArrayList.
+        assertFalse(families.contains(family3));
+        System.out.println("Ok!");
     }
 
     @Test
     void getFamilyById() {
+        System.out.println("Testing getFamilyById():");
+        ArrayList<Family> families = (ArrayList<Family>) familyController.getAllFamilies();
+        Family expectFamily1 = families.get(0);
+        Family actualFamily1 = familyController.getFamilyById(0);
+        assertEquals(expectFamily1, actualFamily1);
+
+        Family expectFamily3 = families.get(2);
+        Family actualFamily3 = familyController.getFamilyById(2);
+        assertEquals(expectFamily3, actualFamily3);
+        System.out.println("Ok!");
     }
 
     @Test
     void getPet() {
+        System.out.println("Testing getPet():");
+        ArrayList<Family> families = (ArrayList<Family>) familyController.getAllFamilies();
+
+        ArrayList<Pet> expectFamily1Pets = families.get(0).getPet();
+        ArrayList<Pet> actualFamily1Pets = familyController.getPet(0);
+        assertEquals(expectFamily1Pets, actualFamily1Pets);
+
+        ArrayList<Pet> expectFamily2Pets = families.get(1).getPet();
+        ArrayList<Pet> actualFamily2Pets = familyController.getPet(1);
+        assertEquals(expectFamily2Pets, actualFamily2Pets);
+        System.out.println("Ok!");
     }
 
     @Test
     void addPet() {
+        System.out.println("Testing addPet():");
+        Dog rich = new Dog("Rich", 5, 60, new HashSet<>(Arrays.asList("eat", "walk", "sleep")));
+        ArrayList<Pet> family3Pets = familyController.getPet(2);
+        //No pets in this family!
+        int initialFamily3PetsNumb = family3Pets.size();
+        //0
+        familyController.addPet(2, rich);
+        assertTrue(family3Pets.contains(rich));
+        assertEquals(initialFamily3PetsNumb+1, family3Pets.size());
+        System.out.println("Ok!");
     }
 }
