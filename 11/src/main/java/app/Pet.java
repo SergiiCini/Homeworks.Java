@@ -74,14 +74,18 @@ abstract class Pet {
 
     abstract public void respond(String nickname);
 
-    @Override
-    public String toString() {
-        return getSpecies() + "{" +
-                "nickname='" + getNickname() + '\'' +
+    public String prettyFormat(){
+        return "{" + "species=" + getSpecies() +
+                ", nickname='" + getNickname() + '\'' +
                 ", age=" + age +
                 ", trickLevel=" + getTrickLevel() +
                 ", habits=" + habits.toString() +
                 '}';
+    }
+
+    @Override
+    public String toString() {
+        return prettyFormat();
     }
 
     protected void finalize() throws Throwable {

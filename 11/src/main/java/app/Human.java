@@ -14,8 +14,23 @@ abstract public class Human {
     private String surname;
     private long birthDate;
     private int iq;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Human)) return false;
+        Human human = (Human) o;
+        return birthDate == human.birthDate && iq == human.iq && Objects.equals(name, human.name) && Objects.equals(surname, human.surname) && Objects.equals(schedule, human.schedule) && Objects.equals(family, human.family) && Objects.equals(gender, human.gender);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, surname, birthDate, iq, schedule, family, gender);
+    }
+
     private HashMap<WeekData, String> schedule;
     protected Family family;
+    private String gender;
 
     public Human() {
     }
@@ -86,6 +101,10 @@ abstract public class Human {
         this.family = family;
     }
 
+    public String getGender(){
+        return gender;
+    }
+
     abstract public void greetPet(int petIndex);
 
     public String checkTrickLevel(int petIndex) {
@@ -98,6 +117,7 @@ abstract public class Human {
     }
 
     public String scheduleToDisplay() {
+        if(schedule == null || schedule.size() == 0) return "null";
         HashMap<WeekData, String> personalSchedule = new HashMap<>();
         personalSchedule.putAll(schedule);
         String scheduleString = "[";
@@ -146,32 +166,24 @@ abstract public class Human {
         return Integer.parseInt(formatedToStringYear);
     }
 
-    @Override
-    public String toString() {
-        return "Human{" +
+    public String prettyFormat(){
+        return "{" +
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", birthDate=" + unixTimeToStringConverter(birthDate) +
                 ", iq=" + iq +
-//                ", schedule=" + scheduleToDisplay() +
+                ", schedule=" + scheduleToDisplay() +
                 '}';
+    }
+
+    @Override
+    public String toString() {
+        return prettyFormat();
     }
 
     protected void finalize() throws Throwable {
         System.out.println("Human object was destroyed.");
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Human)) return false;
-        Human human = (Human) o;
-        return birthDate == human.birthDate && iq == human.iq && name.equals(human.name) && surname.equals(human.surname) && schedule.equals(human.schedule) && family.equals(human.family);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, surname, birthDate, iq, schedule, family);
-    }
 }
 

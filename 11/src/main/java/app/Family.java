@@ -74,21 +74,26 @@ public class Family {
 
     public String childrenString() {
         String childrenLine = "";
+        String childGender = "";
         for (Human child : children) {
-//            System.out.println(child);
-            childrenLine += child.toString() + ';';
-            if (children.indexOf(child) != children.size()) childrenLine += "\n";
+            childGender = child.getGender().equals("man") ? "son" : "daughter";
+            childrenLine += "\t\t" + childGender + ": " + child.prettyFormat() + '\n';
+            if (children.indexOf(child) != children.size()) childrenLine += "";
         }
         return childrenLine;
     }
 
+    public String prettyFormat() {
+        return "family: \n" +
+                "\tmother: " + mother.toString() + "\n" +
+                "\tfather: " + father.toString() + "\n" +
+                "\tchildren: \n" + childrenString() +
+                "\tpets: \n" + "\t\t" + pets + "\n";
+    }
+
     @Override
     public String toString() {
-        return "Family:" +
-                "\nmother=" + mother.getName() + " " + mother.getSurname() +
-                ", \nfather=" + father.getName() + " " + father.getSurname() +
-                ", \nchildren:" + "\n" + childrenString() +
-                "pet:" + "\n" + pets;
+        return prettyFormat();
     }
 
     @Override
