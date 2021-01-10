@@ -82,8 +82,8 @@ class FamilyServiceTest {
         family3 = familyController.getAllFamilies().get(2);
         List<Family> familyList = new ArrayList<>();
         familyList.add(family3);
-        List<Family> filteredFamilies = familyController.getFamiliesBiggerThan(5);
-        assertEquals(familyList, filteredFamilies);
+        Optional<List<Family>> filteredFamilies = familyController.getFamiliesBiggerThan(5);
+        assertEquals(Optional.of(familyList), filteredFamilies);
         System.out.println("Ok!");
     }
 
@@ -92,9 +92,10 @@ class FamilyServiceTest {
         System.out.println("Testing getFamiliesLessThan():");
         family2 = familyController.getAllFamilies().get(1);
         List<Family> familyList = new ArrayList<>();
+
         familyList.add(family2);
-        List<Family> filteredFamilies = familyController.getFamiliesLessThan(4);
-        assertEquals(familyList, filteredFamilies);
+        Optional<List<Family>> filteredFamilies = familyController.getFamiliesLessThan(4);
+        assertEquals(Optional.of(familyList), filteredFamilies);
         System.out.println("Ok!");
     }
 
@@ -235,7 +236,7 @@ class FamilyServiceTest {
         //0
         familyController.addPet(2, rich);
         assertTrue(family3Pets.contains(rich));
-        assertEquals(initialFamily3PetsNumb+1, family3Pets.size());
+        assertEquals(initialFamily3PetsNumb + 1, family3Pets.size());
         System.out.println("Ok!");
     }
 }

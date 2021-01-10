@@ -1,11 +1,10 @@
 package app;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+
 
 public class FamilyService {
     static FamilyDao familyDao;
@@ -33,40 +32,41 @@ public class FamilyService {
         }
     }
 
-    public List<Family> getFamiliesBiggerThan(int numberOfFamilyMembers) {
-        List<Family> filteredFamilies = new ArrayList<>();
-        List<Family> allFamilies = getAllFamilies();
-        for (Family family : allFamilies) {
-            if (family.countFamily() > numberOfFamilyMembers) {
-                filteredFamilies.add(family);
-            }
-        }
-        printData(filteredFamilies);
+    public Optional<List<Family>> getFamiliesBiggerThan(int numberOfFamilyMembers) {
+        List<Family> allFamilies = familyDao.getAllFamilies();
+        Optional<List<Family>> filteredFamilies = Optional.of(allFamilies
+                .stream()
+                .filter(family -> family.countFamily() > numberOfFamilyMembers)
+                .collect(Collectors.toList())
+        );
+        printData(filteredFamilies.get());
         return filteredFamilies;
     }
 
-    public List<Family> getFamiliesLessThan(int numberOfFamilyMembers) {
-        List<Family> filteredFamilies = new ArrayList<>();
-        List<Family> allFamilies = getAllFamilies();
-        for (Family family : allFamilies) {
-            if (family.countFamily() < numberOfFamilyMembers) {
-                filteredFamilies.add(family);
-            }
-        }
-        printData(allFamilies);
+    public Optional<List<Family>> getFamiliesLessThan(int numberOfFamilyMembers) {
+        List<Family> allFamilies = familyDao.getAllFamilies();
+        Optional<List<Family>> filteredFamilies = Optional.of(allFamilies
+                .stream()
+                .filter(family -> family.countFamily() < numberOfFamilyMembers)
+                .collect(Collectors.toList())
+        );
+        printData(filteredFamilies.get());
         return filteredFamilies;
     }
 
     public int countFamiliesWithMemberNumber(int numberOfFamilyMembers) {
-        List<Family> filteredFamilies = new ArrayList<>();
-        List<Family> allFamilies = getAllFamilies();
-        for (Family family : allFamilies) {
-            if (family.countFamily() == numberOfFamilyMembers) {
-                filteredFamilies.add(family);
-            }
+        List<Family> allFamilies = familyDao.getAllFamilies();
+        Optional<List<Family>> filteredFamilies = Optional.of(allFamilies
+                .stream()
+                .filter(family -> family.countFamily() == numberOfFamilyMembers)
+                .collect(Collectors.toList())
+        );
+        if (filteredFamilies.get().size() != 0) {
+            System.out.printf("There is/are %d family/ies with %d members.\n", filteredFamilies.get().size(), numberOfFamilyMembers);
+        } else {
+            System.out.printf("There is no families with %d members.\n", numberOfFamilyMembers);
         }
-        System.out.println(filteredFamilies.size());
-        return filteredFamilies.size();
+        return filteredFamilies.get().size();
     }
 
     public Family createNewFamily(Human mother, Human father) {
@@ -111,20 +111,23 @@ public class FamilyService {
 
     public void deleteAllChildrenOlderThen(int year) {
         List<Family> allFamilies = familyDao.getAllFamilies();
-        for (Family family : allFamilies) {
-            List<Human> children = family.getChildren();
-            for (int i = 0; i < children.size(); i++) {
-                Date childBirthDay = new java.util.Date(children.get(i).getYear());
-                SimpleDateFormat getYear = new java.text.SimpleDateFormat("yyyy");
-                String formatedToStringYear = getYear.format(childBirthDay);
-                int birthYear = Integer.parseInt(formatedToStringYear);
-                long currentAge = LocalDate.now().getYear() - birthYear;
-                if (currentAge > year) {
-                    family.deleteChildByObj(children.get(i));
-                    familyDao.saveFamily(family);
-                }
-            }
-        }
+        List<Human> children = new ArrayList<>();
+        allFamilies.stream()
+                .map(Family::getChildren)
+                .flatMap(Collection::stream)
+                .forEach(child -> {
+                    Date childBirthDay = new java.util.Date(child.getYear());
+                    int birthYear = child.getBirthYear(childBirthDay);
+                    long currentAge = LocalDate.now().getYear() - birthYear;
+                    if (currentAge > year) {
+                        children.add(child);
+                    }
+                });
+        children.stream()
+                .peek(child -> {
+                    child.getFamily().deleteChildByObj(child);
+                })
+                .forEach(System.out::println);
     }
 
     public int count() {

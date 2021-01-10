@@ -3,6 +3,7 @@ package app;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class FamilyController implements FamilyServiceDao {
     public final FamilyService familyService;
@@ -30,12 +31,12 @@ public class FamilyController implements FamilyServiceDao {
     }
 
     @Override
-    public List<Family> getFamiliesBiggerThan(int numberOfFamilyMembers) {
+    public Optional<List<Family>> getFamiliesBiggerThan(int numberOfFamilyMembers) {
         return familyService.getFamiliesBiggerThan(numberOfFamilyMembers);
     }
 
     @Override
-    public List<Family> getFamiliesLessThan(int numberOfFamilyMembers) {
+    public Optional<List<Family>> getFamiliesLessThan(int numberOfFamilyMembers) {
         return familyService.getFamiliesLessThan(numberOfFamilyMembers);
     }
 

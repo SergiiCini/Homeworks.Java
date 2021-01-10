@@ -30,7 +30,7 @@ abstract public class Human {
     public Human(String name, String surname, String birthday, int iq, HashMap<WeekData, String> schedule) throws ParseException {
         this.name = name;
         this.surname = surname;
-        this.birthDate= stringToUnixTimeConvertor(birthday);
+        this.birthDate = stringToUnixTimeConvertor(birthday);
         this.iq = iq;
         this.schedule = schedule;
     }
@@ -110,38 +110,40 @@ abstract public class Human {
     }
 
     public String describeAge() {
+        String age;
         LocalDate dateOfBirth = unixTimeToLocalDateConverter(birthDate);
         Period period = Period.between(dateOfBirth, LocalDate.now());
-        String age =
+        age =
                 name + " " + surname + " lived " + period.getYears() + " years "
                         + period.getMonths() + " months and " + period.getDays() + " days.";
         return age;
     }
 
     public long stringToUnixTimeConvertor(String birthday) throws ParseException {
-        long unixTime;
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = dateFormat.parse(birthday);
-        unixTime = date.getTime();
-        return unixTime;
+        return date.getTime();
     }
 
-    public String dateToUnixTimeConvertor(LocalDate birthdayDate){
-        String birthday;
-        birthday = birthdayDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        return birthday;
+    public String dateToUnixTimeConvertor(LocalDate birthdayDate) {
+        return birthdayDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
     }
 
     public LocalDate unixTimeToLocalDateConverter(long unixTime) {
         return new Timestamp(unixTime).toLocalDateTime().toLocalDate();
     }
 
-    public String unixTimeToStringConverter(long unixTime){
-        String formatedToString;
+    public String unixTimeToStringConverter(long unixTime) {
         Date birthDay = new java.util.Date(unixTime);
         SimpleDateFormat getYear = new java.text.SimpleDateFormat("dd/MM/yyyy");
-        formatedToString = getYear.format(birthDay);
-        return formatedToString;
+        return getYear.format(birthDay);
+    }
+
+    public int getBirthYear(Date date) {
+        SimpleDateFormat getYear = new java.text.SimpleDateFormat("yyyy");
+        String formatedToStringYear = getYear.format(date);
+        return Integer.parseInt(formatedToStringYear);
     }
 
     @Override

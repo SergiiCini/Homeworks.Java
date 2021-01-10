@@ -73,7 +73,7 @@ public class Main {
 
         System.out.println("5. Checking countFamiliesWithMemberNumber(): ");
         //there are 5 people in our family
-        familyController.countFamiliesWithMemberNumber(2);
+        familyController.countFamiliesWithMemberNumber(4);
         System.out.println("*******************************************************************************");
 
         System.out.println("6. Checking createNewFamily(): ");
@@ -93,7 +93,9 @@ public class Main {
 
         System.out.println("9. Checking adoptChild(): ");
         Man child = new Man("Muhamed", "Chaker", "01/01/1999", 55);
+        Woman child4 = new Woman("Rebeka", "Fiore", "01/01/1990", 80);
         familyController.adoptChild(family, child);
+        familyController.adoptChild(family, child4);
         System.out.println(family.getChildren());
         System.out.println("*******************************************************************************");
 

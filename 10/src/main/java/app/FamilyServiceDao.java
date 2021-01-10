@@ -3,14 +3,15 @@ package app;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public interface FamilyServiceDao {
 
     public List<Family> getAllFamilies();
     public <T> void printData(List<T> data);
     public void displayAllFamilies();
-    public List<Family> getFamiliesBiggerThan(int numberOfFamilyMembers);
-    public List<Family> getFamiliesLessThan(int numberOfFamilyMembers);
+    public Optional<List<Family>> getFamiliesBiggerThan(int numberOfFamilyMembers);
+    public Optional<List<Family>> getFamiliesLessThan(int numberOfFamilyMembers);
     public int countFamiliesWithMemberNumber(int numberOfFamilyMembers);
     public Family createNewFamily(Human mother, Human father);
     public boolean deleteFamilyByIndex(int index);
