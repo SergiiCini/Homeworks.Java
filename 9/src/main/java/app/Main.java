@@ -123,7 +123,7 @@ public class Main {
         System.out.println("*******************************************************************************");
 
         System.out.println("15. Checking describeAge(): ");
-        System.out.println(mother1.describeAge());
+        System.out.println(child.describeAge());
 
 
 

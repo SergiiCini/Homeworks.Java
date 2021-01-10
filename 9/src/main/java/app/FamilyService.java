@@ -114,7 +114,7 @@ public class FamilyService {
         for (Family family : allFamilies) {
             List<Human> children = family.getChildren();
             for (int i = 0; i < children.size(); i++) {
-                Date childBirthDay = new java.util.Date(children.get(i).getYear()*1000L);
+                Date childBirthDay = new java.util.Date(children.get(i).getYear());
                 SimpleDateFormat getYear = new java.text.SimpleDateFormat("yyyy");
                 String formatedToStringYear = getYear.format(childBirthDay);
                 int birthYear = Integer.parseInt(formatedToStringYear);
@@ -136,7 +136,6 @@ public class FamilyService {
     }
 
     public ArrayList<Pet> getPet(int familyIndex) {
-//        ArrayList<Pet> pets = new ArrayList<>();
         if (familyIndex > getAllFamilies().size()) {
             System.out.println("No family with entered index...");
             return null;

@@ -86,8 +86,6 @@ abstract public class Human {
         this.family = family;
     }
 
-//    abstract public void greetPet();
-
     abstract public void greetPet(int petIndex);
 
     public String checkTrickLevel(int petIndex) {
@@ -121,14 +119,16 @@ abstract public class Human {
     }
 
     public long stringToUnixTimeConvertor(String birthday) throws ParseException {
+        long unixTime;
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = dateFormat.parse(birthday);
-        long unixTime = (long) date.getTime()/1000;
+        unixTime = date.getTime();
         return unixTime;
     }
 
     public String dateToUnixTimeConvertor(LocalDate birthdayDate){
-        String birthday = birthdayDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        String birthday;
+        birthday = birthdayDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         return birthday;
     }
 
@@ -136,12 +136,20 @@ abstract public class Human {
         return new Timestamp(unixTime).toLocalDateTime().toLocalDate();
     }
 
+    public String unixTimeToStringConverter(long unixTime){
+        String formatedToString;
+        Date birthDay = new java.util.Date(unixTime);
+        SimpleDateFormat getYear = new java.text.SimpleDateFormat("dd/MM/yyyy");
+        formatedToString = getYear.format(birthDay);
+        return formatedToString;
+    }
+
     @Override
     public String toString() {
         return "Human{" +
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", birthDate=" + birthDate +
+                ", birthDate=" + unixTimeToStringConverter(birthDate) +
                 ", iq=" + iq +
 //                ", schedule=" + scheduleToDisplay() +
                 '}';

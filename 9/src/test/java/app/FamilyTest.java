@@ -60,9 +60,9 @@ class FamilyTest {
                         "mother=Kate Middletone, \n" +
                         "father=Michael Kors, \n" +
                         "children:\n" +
-                        "Human{name='Sergio', surname='Kors', birthDate=909871200, iq=90};\n" +
-                        "Human{name='Alex', surname='Kors', birthDate=987368400, iq=90};\n" +
-                        "Human{name='Jane', surname='Kors', birthDate=1029272400, iq=80};\n" +
+                        "Human{name='Sergio', surname='Kors', birthDate=01/11/1998, iq=90};\n" +
+                        "Human{name='Alex', surname='Kors', birthDate=16/04/2001, iq=90};\n" +
+                        "Human{name='Jane', surname='Kors', birthDate=14/08/2002, iq=80};\n" +
                         "pet:\n" +
                         "[DOG{nickname='Chester', age=3, trickLevel=90, habits=[sleep, eat, drink]}]";
         assertEquals(expectedPrint, newFamily.toString());
