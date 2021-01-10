@@ -1,10 +1,11 @@
 package app;
 
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -110,10 +111,13 @@ abstract public class Human {
         return scheduleString;
     }
 
-    public Instant describeAge(){
-        long unixTime = Instant.now().getEpochSecond();
-        Instant date = Instant.ofEpochSecond(unixTime);
-        return date;
+    public String describeAge() {
+        LocalDate dateOfBirth = unixTimeToLocalDateConverter(birthDate);
+        Period period = Period.between(dateOfBirth, LocalDate.now());
+        String age =
+                name + " " + surname + " lived " + period.getYears() + " years "
+                        + period.getMonths() + " months and " + period.getDays() + " days.";
+        return age;
     }
 
     public long stringToUnixTimeConvertor(String birthday) throws ParseException {
@@ -126,6 +130,10 @@ abstract public class Human {
     public String dateToUnixTimeConvertor(LocalDate birthdayDate){
         String birthday = birthdayDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         return birthday;
+    }
+
+    public LocalDate unixTimeToLocalDateConverter(long unixTime) {
+        return new Timestamp(unixTime).toLocalDateTime().toLocalDate();
     }
 
     @Override
