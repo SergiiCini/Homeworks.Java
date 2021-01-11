@@ -10,7 +10,7 @@ public class RandomFamilyCreator {
     private static FamilyController familyController;
 
     public RandomFamilyCreator(FamilyController familyController) {
-        RandomFamilyCreator.familyController = familyController;
+        this.familyController = new FamilyController();
     }
 
     public void FamiliesCreator() throws ParseException {

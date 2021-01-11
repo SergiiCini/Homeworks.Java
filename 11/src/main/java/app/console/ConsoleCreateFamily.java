@@ -6,11 +6,12 @@ import java.text.ParseException;
 import java.util.Scanner;
 
 public class ConsoleCreateFamily {
+    Family family;
     private static final Scanner scanner = new Scanner(System.in);
     private static FamilyController familyController;
 
-    public ConsoleCreateFamily() throws ParseException {
-        Family family = familyController.createNewFamily(createMother(), createFather());
+       public ConsoleCreateFamily() throws ParseException {
+        this.family = familyController.createNewFamily(createMother(), createFather());
     }
 
     public static Woman createMother() throws ParseException {
