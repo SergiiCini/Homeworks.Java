@@ -51,14 +51,20 @@ public class RandomFamilyCreator {
 
 
         Family newFamily1 = familyController.createNewFamily(mother1, father1);
+        newFamily1.addChild(child1);
+        newFamily1.addChild(child2);
         Family newFamily2 = familyController.createNewFamily(mother2, father2);
+        newFamily2.addChild(child3);
         Family newFamily3 = familyController.createNewFamily(mother3, father3);
+        newFamily3.addChild(child4);
         familyController.addPet(0, pet1);
         familyController.addPet(0, pet2);
         familyController.addPet(1, pet3);
         familyController.addPet(2, pet4);
 
         familyController.bornChild(newFamily3, "Ivan", "Vera");
+
+        System.out.println(familyController.getAllFamilies());
 
     }
 

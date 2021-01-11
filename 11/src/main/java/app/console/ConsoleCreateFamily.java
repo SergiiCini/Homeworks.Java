@@ -6,13 +6,17 @@ import java.text.ParseException;
 import java.util.Scanner;
 
 public class ConsoleCreateFamily {
-    Family family;
+    private Family family;
     private static final Scanner scanner = new Scanner(System.in);
-    private static FamilyController familyController;
+//    private static FamilyController familyController;
+//
+//       public ConsoleCreateFamily() throws ParseException {
+//           this.familyController = familyController;
+//           this.family = familyController.createNewFamily(createMother(), createFather());
+//    }
 
-       public ConsoleCreateFamily(FamilyController familyController) throws ParseException {
-        this.family = familyController.createNewFamily(createMother(), createFather());
-        this.familyController = familyController;
+    public static Family createFamily(FamilyController familyController) throws ParseException {
+        return familyController.createNewFamily(createMother(), createFather());
     }
 
     public static Woman createMother() throws ParseException {

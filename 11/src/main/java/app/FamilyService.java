@@ -110,6 +110,7 @@ public class FamilyService {
     }
 
     public void deleteAllChildrenOlderThen(int year) {
+        System.out.println("I'm here deleting...");
         List<Family> allFamilies = familyDao.getAllFamilies();
         List<Human> children = new ArrayList<>();
         allFamilies.stream()

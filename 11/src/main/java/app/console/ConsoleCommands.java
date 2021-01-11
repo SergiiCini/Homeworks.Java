@@ -6,17 +6,13 @@ import java.text.ParseException;
 import java.util.*;
 
 public class ConsoleCommands {
-    private static FamilyController familyController;
+
     private static final Scanner scanner = new Scanner(System.in);
     private static final Map<String, Runnable> commands = new HashMap<>();
     private static final Map<String, Runnable> additionalCommands = new HashMap<>();
 
 
-    public void ConsoleCommands(FamilyController familyController) {
-        this.familyController = familyController;
-    }
-
-    static void consoleCommand(FamilyController familyController) {
+    public static void consoleCommand(FamilyController familyController) {
         commands.put("1", () -> {
             try {
                 new RandomFamilyCreator(familyController).FamiliesCreator();
@@ -65,7 +61,7 @@ public class ConsoleCommands {
 
         commands.put("6", () -> {
             try {
-                new ConsoleCreateFamily(familyController);
+                ConsoleCreateFamily.createFamily(familyController);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -108,7 +104,7 @@ public class ConsoleCommands {
         });
     }
 
-    static void consoleAdditionalCommands(FamilyController familyController) {
+    public static void consoleAdditionalCommands(FamilyController familyController) {
         additionalCommands.put("1", () -> {
             ArrayList<Family> families = (ArrayList<Family>) familyController.getAllFamilies();
             if (families.size() == 0) {
