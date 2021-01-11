@@ -14,6 +14,7 @@ public class ConsoleMain {
 
     public static void main(String[] args) {
         ConsoleCommands.consoleCommand(familyController);
+        ConsoleCommands.consoleAdditionalCommands(familyController);
         while (true){
             System.out.println(new ConsoleMenu().consoleMainMenu());
             String input = scanner.nextLine();

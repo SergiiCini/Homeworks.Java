@@ -65,7 +65,7 @@ public class ConsoleCommands {
 
         commands.put("6", () -> {
             try {
-                new ConsoleCreateFamily();
+                new ConsoleCreateFamily(familyController);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -108,8 +108,7 @@ public class ConsoleCommands {
         });
     }
 
-    public void consoleAdditionalCommands() {
-
+    static void consoleAdditionalCommands(FamilyController familyController) {
         additionalCommands.put("1", () -> {
             ArrayList<Family> families = (ArrayList<Family>) familyController.getAllFamilies();
             if (families.size() == 0) {
@@ -161,7 +160,6 @@ public class ConsoleCommands {
         additionalCommands.put("3", () -> {
             System.out.println("Going back to main menu...");
         });
-
     }
 
     public static void userConsoleInput(String menuType, String userInput) {
@@ -176,7 +174,6 @@ public class ConsoleCommands {
             }
         }
     }
-
 
     public static int getNumber() {
         return Integer.parseInt(scanner.nextLine());

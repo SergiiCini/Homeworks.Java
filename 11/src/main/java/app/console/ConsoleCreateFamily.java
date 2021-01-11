@@ -10,8 +10,9 @@ public class ConsoleCreateFamily {
     private static final Scanner scanner = new Scanner(System.in);
     private static FamilyController familyController;
 
-       public ConsoleCreateFamily() throws ParseException {
+       public ConsoleCreateFamily(FamilyController familyController) throws ParseException {
         this.family = familyController.createNewFamily(createMother(), createFather());
+        this.familyController = familyController;
     }
 
     public static Woman createMother() throws ParseException {
