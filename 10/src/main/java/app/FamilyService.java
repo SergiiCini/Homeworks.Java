@@ -18,9 +18,7 @@ public class FamilyService {
     }
 
     public <T> void printData(List<T> data) {
-        for (T item : data) {
-            System.out.println(item);
-        }
+        data.forEach(System.out::println);
     }
 
     public void displayAllFamilies() {
