@@ -1,7 +1,6 @@
 package app;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -63,8 +62,6 @@ public class RandomFamilyCreator {
         familyController.addPet(2, pet4);
 
         familyController.bornChild(newFamily3, "Ivan", "Vera");
-
-        System.out.println(familyController.getAllFamilies());
 
     }
 

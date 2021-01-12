@@ -6,13 +6,12 @@ import java.text.ParseException;
 import java.util.*;
 
 public class ConsoleCommands {
-
     private static final Scanner scanner = new Scanner(System.in);
     private static final Map<String, Runnable> commands = new HashMap<>();
     private static final Map<String, Runnable> additionalCommands = new HashMap<>();
 
-
     public static void consoleCommand(FamilyController familyController) {
+        System.out.println(familyController);
         commands.put("1", () -> {
             try {
                 new RandomFamilyCreator(familyController).FamiliesCreator();
@@ -217,4 +216,6 @@ public class ConsoleCommands {
                 return null;
         }
     }
+
+
 }
