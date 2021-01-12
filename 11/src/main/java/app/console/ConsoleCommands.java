@@ -126,7 +126,6 @@ public class ConsoleCommands {
         });
 
         additionalCommands.put("2", () -> {
-            System.out.println("I'm here!");
             String gender;
             ArrayList<Family> families = (ArrayList<Family>) familyController.getAllFamilies();
             if (families.size() == 0) {
@@ -158,16 +157,29 @@ public class ConsoleCommands {
     }
 
     public static void userConsoleInput(String menuType, String userInput) {
-        switch (menuType) {
-            case "mainMenu": {
+        if (menuType.equals("mainMenu")) {
+            List<String> mainMenuItems = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "exit");
+            if (mainMenuItems.contains(userInput)) {
                 Runnable getMenuValue = commands.get(userInput);
                 getMenuValue.run();
+            } else {
+                System.out.println("You have entered incorrect menu input data. Please, try again!");
             }
-            case "additionalMenu": {
+
+        } else if (menuType.equals("additionalMenu")) {
+            List<String> additionalMenuItems = Arrays.asList("1", "2", "3");
+            if (additionalMenuItems.contains(userInput)) {
                 Runnable getAdditionalMenuValue = additionalCommands.get(userInput);
                 getAdditionalMenuValue.run();
+            } else {
+                System.out.println("You have entered incorrect menu input data. Please, try again!");
             }
         }
+
+    }
+
+    public static void readMenuInputData() {
+
     }
 
     public static int getNumber() {

@@ -8,12 +8,6 @@ import java.util.Scanner;
 public class ConsoleCreateFamily {
     private Family family;
     private static final Scanner scanner = new Scanner(System.in);
-//    private static FamilyController familyController;
-//
-//       public ConsoleCreateFamily() throws ParseException {
-//           this.familyController = familyController;
-//           this.family = familyController.createNewFamily(createMother(), createFather());
-//    }
 
     public static Family createFamily(FamilyController familyController) throws ParseException {
         return familyController.createNewFamily(createMother(), createFather());
