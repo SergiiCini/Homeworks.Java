@@ -145,7 +145,7 @@ public class ConsoleCommands {
             if (families.size() == 0) {
                 System.out.println("There are no saved families in out DB. You need to create families first!");
             } else {
-                System.out.println("Enter the index of family you wont to edit:");
+                System.out.println("Enter the index of family you want to edit to:");
                 int familyIndex;
                 while (true) {
                     System.out.printf("There are %d families in our DB.", families.size());
@@ -212,7 +212,7 @@ public class ConsoleCommands {
     }
 
     public static String getString() {
-        return scanner.nextLine();
+        return scanner.next();
     }
 
     public static Human createAdoptChild(String gender) throws ParseException {
