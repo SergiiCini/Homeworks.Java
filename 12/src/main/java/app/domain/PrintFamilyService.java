@@ -1,4 +1,6 @@
-package app;
+package app.domain;
+
+import app.controller.FamilyController;
 
 import java.text.ParseException;
 import java.util.Arrays;

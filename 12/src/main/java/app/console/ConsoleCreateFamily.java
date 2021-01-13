@@ -1,6 +1,9 @@
 package app.console;
 
-import app.*;
+import app.controller.FamilyController;
+import app.domain.Family;
+import app.domain.Man;
+import app.domain.Woman;
 
 import java.text.ParseException;
 import java.util.Scanner;

@@ -1,5 +1,7 @@
 package app;
 
+import app.controller.FamilyController;
+import app.domain.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,8 +1,7 @@
 package app.console;
 
 
-import app.FamilyController;
-import app.RandomFamilyCreator;
+import app.controller.FamilyController;
 
 import java.text.ParseException;
 import java.util.HashMap;
@@ -10,7 +9,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class ConsoleMain {
-//    public static FamilyController familyController;
+
     private static final Scanner scanner = new Scanner(System.in);
     private static final Map<String, Runnable> commands = new HashMap<>();
     private static final Map<String, Runnable> additionalCommands = new HashMap<>();
@@ -22,7 +21,11 @@ public class ConsoleMain {
 //        new RandomFamilyCreator(familyController).FamiliesCreator();
         while (true){
             System.out.println(new ConsoleMenu().consoleMainMenu());
+            System.out.println("-------------------------------------");
+            System.out.println("Enter your command under this line: ");
+            System.out.println("-------------------------------------");
             String input = scanner.nextLine();
+
             ConsoleCommands.userConsoleInput("mainMenu", input);
         }
     }

@@ -1,9 +1,9 @@
-package app;
+package app.domain;
 
 import java.util.HashSet;
 import java.util.Objects;
 
-abstract class Pet {
+public abstract class Pet {
     Species species;
     String nickname;
     int age;

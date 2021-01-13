@@ -1,4 +1,7 @@
-package app;
+package app.collection;
+
+import app.contract.FamilyDao;
+import app.domain.Family;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,8 @@
-package app;
+package app.contract;
+
+import app.domain.Family;
+import app.domain.Human;
+import app.domain.Pet;
 
 import java.text.ParseException;
 import java.util.ArrayList;

@@ -1,4 +1,10 @@
-package app;
+package app.controller;
+
+import app.contract.FamilyServiceDao;
+import app.domain.Family;
+import app.domain.Human;
+import app.domain.Pet;
+import app.service.FamilyService;
 
 import java.text.ParseException;
 import java.util.ArrayList;

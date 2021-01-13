@@ -1,4 +1,6 @@
-package app;
+package app.contract;
+
+import app.domain.Family;
 
 import java.util.List;
 

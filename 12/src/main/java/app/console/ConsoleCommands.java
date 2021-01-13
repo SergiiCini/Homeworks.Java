@@ -1,6 +1,7 @@
 package app.console;
 
-import app.*;
+import app.controller.FamilyController;
+import app.domain.*;
 
 import java.text.ParseException;
 import java.util.*;

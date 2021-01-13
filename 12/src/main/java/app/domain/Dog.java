@@ -1,8 +1,10 @@
-package app;
+package app.domain;
+
+import app.contract.Foul;
 
 import java.util.HashSet;
 
-public class Dog extends Pet implements Foul{
+public class Dog extends Pet implements Foul {
     public Dog(String nickname, int age, int trickLevel, HashSet<String> habits){
         super(nickname,age, trickLevel, habits);
         this.species = Species.DOG;

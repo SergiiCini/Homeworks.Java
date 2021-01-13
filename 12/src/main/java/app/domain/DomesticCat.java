@@ -1,4 +1,6 @@
-package app;
+package app.domain;
+
+import app.contract.Foul;
 
 import java.util.HashSet;
 
