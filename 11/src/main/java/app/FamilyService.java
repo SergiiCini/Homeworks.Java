@@ -18,8 +18,8 @@ public class FamilyService {
     }
 
     public <T> void printData(List<T> data) {
-        for (T item : data) {
-            System.out.println(item);
+        for(int i = 0; i < data.size(); i++){
+            System.out.println(i+1 + "." + data.get(i));
         }
     }
 
@@ -110,7 +110,6 @@ public class FamilyService {
     }
 
     public void deleteAllChildrenOlderThen(int year) {
-        System.out.println("I'm here deleting...");
         List<Family> allFamilies = familyDao.getAllFamilies();
         List<Human> children = new ArrayList<>();
         allFamilies.stream()

@@ -71,8 +71,13 @@ public class ConsoleCommands {
             if (families.size() == 0) {
                 System.out.println("There are no saved families in out DB. You need to create families first!");
             } else {
+                int familyIndex;
                 System.out.println("Enter the index of family you want to delete:");
-                int familyIndex = getNumber();
+                while (true) {
+                    System.out.printf("Input family number should be by range from 1 to %d! ", families.size());
+                    familyIndex = getNumber();
+                    if (familyIndex > 0 && familyIndex <= families.size()) break;
+                }
                 familyController.deleteFamilyByIndex(familyIndex - 1);
             }
         });
@@ -97,8 +102,10 @@ public class ConsoleCommands {
                     System.exit(0);
                 }
                 case "no": {
-                    System.out.println(new ConsoleMenu().consoleAdditionalMenu());
+                    break;
                 }
+                default:
+                    break;
             }
         });
     }
@@ -110,18 +117,27 @@ public class ConsoleCommands {
                 System.out.println("There are no saved families in out DB. You need to create families first!");
             } else {
                 System.out.println("Enter the index of family you want to edit:");
+                int familyIndex;
+                while (true) {
+                    System.out.printf("There are %d families in our DB.", families.size());
+                    familyIndex = getNumber();
+                    if (familyIndex >= 1 && familyIndex <= families.size()) {
+                        break;
+                    }
+                }
+                Family editedFamily = familyController.getFamilyById(familyIndex - 1);
+                System.out.println("Enter boy's name if you will have a boy:");
+                String boysName = scanner.next();
 
-                int familyIndex = getNumber();
-                Family editedFamily = familyController.getFamilyById(familyIndex);
+                System.out.println("Enter girl's name if you will have a girl:");
+                String girlsName = scanner.next();
+
                 try {
-                    System.out.println("Enter boy's name if you will have a boy:");
-                    String boysName = scanner.nextLine();
-                    System.out.println("Enter girl's name if you will have a girl:");
-                    String girlsName = scanner.nextLine();
                     familyController.bornChild(editedFamily, boysName, girlsName);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+
             }
         });
 
@@ -132,13 +148,19 @@ public class ConsoleCommands {
                 System.out.println("There are no saved families in out DB. You need to create families first!");
             } else {
                 System.out.println("Enter the index of family you want to edit:");
-
-                int familyIndex = getNumber();
-                Family editedFamily = familyController.getFamilyById(familyIndex);
+                int familyIndex;
+                while (true) {
+                    System.out.printf("There are %d families in our DB.", families.size());
+                    familyIndex = getNumber();
+                    if (familyIndex >= 1 && familyIndex <= families.size()) {
+                        break;
+                    }
+                }
+                Family editedFamily = familyController.getFamilyById(familyIndex - 1);
                 try {
                     while (true) {
+                        gender = scanner.nextLine().trim().toLowerCase();
                         System.out.println("Enter child gender (boy or girl):");
-                        gender = scanner.nextLine();
                         if (gender.equals("boy") || gender.equals("girl")) {
                             break;
                         }
@@ -157,33 +179,38 @@ public class ConsoleCommands {
     }
 
     public static void userConsoleInput(String menuType, String userInput) {
-        if (menuType.equals("mainMenu")) {
-            List<String> mainMenuItems = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "exit");
-            if (mainMenuItems.contains(userInput)) {
-                Runnable getMenuValue = commands.get(userInput);
-                getMenuValue.run();
-            } else {
-                System.out.println("You have entered incorrect menu input data. Please, try again!");
+        switch (menuType) {
+            case "mainMenu": {
+                List<String> mainMenuItems = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "exit");
+                if (mainMenuItems.contains(userInput)) {
+                    Runnable getMenuValue = commands.get(userInput);
+                    getMenuValue.run();
+                } else {
+                    System.out.println("You have entered incorrect menu input data. Please, try again!");
+                }
+                break;
             }
-
-        } else if (menuType.equals("additionalMenu")) {
-            List<String> additionalMenuItems = Arrays.asList("1", "2", "3");
-            if (additionalMenuItems.contains(userInput)) {
-                Runnable getAdditionalMenuValue = additionalCommands.get(userInput);
-                getAdditionalMenuValue.run();
-            } else {
-                System.out.println("You have entered incorrect menu input data. Please, try again!");
+            case "additionalMenu": {
+                List<String> additionalMenuItems = Arrays.asList("1", "2", "3");
+                if (additionalMenuItems.contains(userInput)) {
+                    Runnable getAdditionalMenuValue = additionalCommands.get(userInput);
+                    getAdditionalMenuValue.run();
+                } else {
+                    System.out.println("You have entered incorrect menu input data. Please, try again!");
+                }
+                break;
             }
+            default:
+                break;
         }
-
-    }
-
-    public static void readMenuInputData() {
-
     }
 
     public static int getNumber() {
-        return Integer.parseInt(scanner.nextLine());
+        while (!scanner.hasNextInt()) {
+            System.out.println("Incorrect input format! Input data should be a number.");
+            scanner.next();
+        }
+        return scanner.nextInt();
     }
 
     public static String getString() {
@@ -194,35 +221,81 @@ public class ConsoleCommands {
         switch (gender) {
             case "boy": {
                 System.out.println("Enter son's name:");
-                String sonName = scanner.nextLine();
+                String sonName = getString();
                 System.out.println("Enter son's surname");
-                String sonSurname = scanner.nextLine();
+                String sonSurname = getString();
                 System.out.println("Enter son's year of birth:");
-                String sonBirthdayYear = scanner.nextLine();
+                int sonBirthdayYear;
+                while (true) {
+                    System.out.println("The year of birth should be in range from 1920 to 2010!");
+                    sonBirthdayYear = getNumber();
+                    if (sonBirthdayYear >= 1920 && sonBirthdayYear <= 2010) break;
+                }
+                String sonBirthdayYearString = String.valueOf(sonBirthdayYear);
                 System.out.println("Enter son's month of birth:");
-                String sonBirthdayMonth = scanner.nextLine();
+                int sonBirthdayMonth;
+                while (true) {
+                    System.out.println("The month of birth should be in range from 1 to 12!");
+                    sonBirthdayMonth = getNumber();
+                    if (sonBirthdayMonth >= 1 && sonBirthdayMonth <= 12) break;
+                }
+                String sonBirthdayMonthString = String.valueOf(sonBirthdayMonth);
                 System.out.println("Enter son's day of birth:");
-                String sonBirthdayDay = scanner.nextLine();
+                int sonBirthdayDay;
+                while (true) {
+                    System.out.println("The day of birth should be in range from 1 to 31!");
+                    sonBirthdayDay = getNumber();
+                    if (sonBirthdayDay >= 1 && sonBirthdayDay <= 31) break;
+                }
+                String sonBirthdayDayString = String.valueOf(sonBirthdayDay);
                 System.out.println("Enter son's iq-level:");
-                int sonIq = Integer.parseInt(scanner.nextLine());
-                String sonBirthDay = ConsoleCreateFamily.birthDaySticker(sonBirthdayDay, sonBirthdayMonth, sonBirthdayYear);
-                return new Man(sonName, sonSurname, sonBirthdayDay, sonIq);
+                int sonIq = 0;
+                while (true) {
+                    System.out.println("The iq-level should be in range from 1 to 100");
+                    sonIq = getNumber();
+                    if (sonIq > 0 && sonIq <= 100) break;
+                }
+                String sonBirthDay = ConsoleCreateFamily.birthDaySticker(sonBirthdayDayString, sonBirthdayMonthString, sonBirthdayYearString);
+                return new Man(sonName, sonSurname, sonBirthDay, sonIq);
             }
             case "girl": {
                 System.out.println("Enter daughter's name:");
-                String daughterName = scanner.nextLine();
+                String daughterName = getString();
                 System.out.println("Enter daughter's surname");
-                String daughterSurname = scanner.nextLine();
+                String daughterSurname = getString();
                 System.out.println("Enter daughter's year of birth:");
-                String daughterBirthdayYear = scanner.nextLine();
+                int daughterBirthdayYear;
+                while (true) {
+                    System.out.println("The year of birth should be in range from 1920 to 2010!");
+                    daughterBirthdayYear = getNumber();
+                    if (daughterBirthdayYear >= 1920 && daughterBirthdayYear <= 2010) break;
+                }
+                String daughterBirthdayYearString = String.valueOf(daughterBirthdayYear);
                 System.out.println("Enter daughter's month of birth:");
-                String daughterBirthdayMonth = scanner.nextLine();
+                int daughterBirthdayMonth;
+                while (true) {
+                    System.out.println("The month of birth should be in range from 1 to 12!");
+                    daughterBirthdayMonth = getNumber();
+                    if (daughterBirthdayMonth >= 1 && daughterBirthdayMonth <= 12) break;
+                }
+                String daughterBirthdayMonthString = String.valueOf(daughterBirthdayMonth);
                 System.out.println("Enter daughter's day of birth:");
-                String daughterBirthdayDay = scanner.nextLine();
+                int daughterBirthdayDay;
+                while (true) {
+                    System.out.println("The day of birth should be in range from 1 to 31!");
+                    daughterBirthdayDay = getNumber();
+                    if (daughterBirthdayDay >= 1 && daughterBirthdayDay <= 31) break;
+                }
+                String daughterBirthdayDayString = String.valueOf(daughterBirthdayDay);
                 System.out.println("Enter daughter's iq-level:");
-                int daughterIq = Integer.parseInt(scanner.nextLine());
-                String daughterBirthDay = ConsoleCreateFamily.birthDaySticker(daughterBirthdayDay, daughterBirthdayMonth, daughterBirthdayYear);
-                return new Woman(daughterName, daughterSurname, daughterBirthdayDay, daughterIq);
+                int daughterIq = 0;
+                while (true) {
+                    System.out.println("The iq-level should be in range from 1 to 100");
+                    daughterIq = getNumber();
+                    if (daughterIq > 0 && daughterIq <= 100) break;
+                }
+                String daughterBirthDay = ConsoleCreateFamily.birthDaySticker(daughterBirthdayDayString, daughterBirthdayMonthString, daughterBirthdayYearString);
+                return new Woman(daughterName, daughterSurname, daughterBirthDay, daughterIq);
             }
             default:
                 return null;
