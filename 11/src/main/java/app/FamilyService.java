@@ -1,5 +1,7 @@
 package app;
 
+import app.exceptions.FamilyOverflowException;
+
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.*;
@@ -80,6 +82,8 @@ public class FamilyService {
     }
 
     public Family bornChild(Family family, String sonsName, String daughterName) throws ParseException {
+        int familiesSize = familyDao.getAllFamilies().size();
+        if(familiesSize > 7) throw new FamilyOverflowException();
         Human father = family.getFather();
         String surname = father.getSurname();
         LocalDate birthdayDate = LocalDate.now();
@@ -104,6 +108,8 @@ public class FamilyService {
     }
 
     public Family adoptChild(Family family, Human child) {
+        int familiesSize = familyDao.getAllFamilies().size();
+        if(familiesSize > 7) throw new FamilyOverflowException();
         family.addChild(child);
         familyDao.saveFamily(family);
         return family;
