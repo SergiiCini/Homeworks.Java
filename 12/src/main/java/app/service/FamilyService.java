@@ -5,6 +5,7 @@ import app.contract.FamilyDao;
 import app.domain.*;
 import app.exceptions.FamilyOverflowException;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.*;
@@ -171,5 +172,12 @@ public class FamilyService {
         return true;
     }
 
+    public void getDataFromFile() throws IOException, ClassNotFoundException {
+        familyDao.getDataFromFile();
+    }
+
+    public void saveDataToFile() throws IOException {
+        familyDao.saveDataToFile();
+    }
 
 }

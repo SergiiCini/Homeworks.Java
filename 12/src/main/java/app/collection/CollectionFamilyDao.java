@@ -2,14 +2,16 @@ package app.collection;
 
 import app.contract.FamilyDao;
 import app.domain.Family;
+import app.service.FileSystemService;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CollectionFamilyDao implements FamilyDao {
 
     //List is working like a database
-    private final List<Family> familiesList;
+    private List<Family> familiesList;
 
     public CollectionFamilyDao() {
         this.familiesList = new ArrayList<>();
@@ -57,5 +59,20 @@ public class CollectionFamilyDao implements FamilyDao {
         } else {
             familiesList.add(family);
         }
+    }
+
+    @Override
+    public void getDataFromFile() throws IOException, ClassNotFoundException {
+        FileSystemService fss = new FileSystemService();
+        Object receivedData = fss.getDataFromFile("families.bin");
+        if (receivedData instanceof List) {
+            familiesList = (List<Family>) receivedData;
+        }
+    }
+
+    @Override
+    public void saveDataToFile() throws IOException {
+        FileSystemService fss = new FileSystemService();
+        fss.saveDataToFile("families.bin", familiesList);
     }
 }
