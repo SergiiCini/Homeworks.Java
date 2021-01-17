@@ -1,9 +1,10 @@
 package app.domain;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 
-public abstract class Pet {
+public abstract class Pet implements Serializable {
     Species species;
     String nickname;
     int age;
@@ -74,12 +75,12 @@ public abstract class Pet {
 
     abstract public void respond(String nickname);
 
-    public String prettyFormat(){
+    public String prettyFormat() {
         return "{" + "species=" + getSpecies() +
                 ", nickname='" + getNickname() + '\'' +
                 ", age=" + age +
                 ", trickLevel=" + getTrickLevel() +
-                ", habits=" + habits.toString() +
+                ", habits=" + habits +
                 '}';
     }
 

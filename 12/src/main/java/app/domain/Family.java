@@ -86,8 +86,8 @@ public class Family implements Serializable {
 
     public String prettyFormat() {
         return "family: \n" +
-                "\tmother: " + mother.toString() + "\n" +
-                "\tfather: " + father.toString() + "\n" +
+                "\tmother: " + mother.prettyFormat() + "\n" +
+                "\tfather: " + father.prettyFormat() + "\n" +
                 "\tchildren: \n" + childrenString() +
                 "\tpets: \n" + "\t\t" + pets + "\n";
     }

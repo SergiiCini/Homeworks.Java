@@ -16,6 +16,8 @@ public class FileSystemService {
         FileInputStream fis = new FileInputStream(file);
         ObjectInputStream ois = new ObjectInputStream(fis);
         Object receivedData = ois.readObject();
+        System.out.println("!!!!!!!!" + receivedData);
+
 
         ois.close();
         fis.close();
@@ -24,6 +26,7 @@ public class FileSystemService {
     }
 
     public void saveDataToFile(String fileName, Object data) throws IOException {
+        System.out.println("Data" + data);
         File file = new File(fileName);
         boolean fileIsFound = file.isFile();
         if (!fileIsFound) {

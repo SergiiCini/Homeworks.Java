@@ -1,5 +1,6 @@
 package app.domain;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -9,7 +10,7 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-abstract public class Human {
+abstract public class Human implements Serializable {
     private String name;
     private String surname;
     private long birthDate;
@@ -117,7 +118,7 @@ abstract public class Human {
     }
 
     public String scheduleToDisplay() {
-        if(schedule == null || schedule.size() == 0) return "null";
+        if(schedule == null || schedule.size() == 0) return "no schedule";
         HashMap<WeekData, String> personalSchedule = new HashMap<>();
         personalSchedule.putAll(schedule);
         String scheduleString = "[";

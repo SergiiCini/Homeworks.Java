@@ -81,15 +81,12 @@ public class CollectionFamilyDao implements FamilyDao {
 
     @Override
     public void saveDataToFile() throws IOException {
-//        try {
-//            FileSystemService fss = new FileSystemService();
-//            fss.saveDataToFile(fileName, familiesList);
-//        } catch (IOException e) {
-//            throw new FamilyOverflowException("There is аn error by saving " + fileName +
-//                    " into hard disk.");
-//        }
-
-        FileSystemService fss = new FileSystemService();
-        fss.saveDataToFile(fileName, familiesList);
+        try {
+            FileSystemService fss = new FileSystemService();
+            fss.saveDataToFile(fileName, familiesList);
+        } catch (IOException e) {
+            throw new FamilyOverflowException("There is аn error by saving " + fileName +
+                    " into hard disk.");
+        }
     }
 }
