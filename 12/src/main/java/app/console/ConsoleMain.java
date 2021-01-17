@@ -22,8 +22,7 @@ public class ConsoleMain {
         while (true){
             System.out.println(new ConsoleMenu().consoleMainMenu());
             System.out.println("-------------------------------------");
-            System.out.println("Enter your command under this line: ");
-            System.out.println("-------------------------------------");
+            System.out.print("Enter your command: ");
             String input = scanner.nextLine();
 
             ConsoleCommands.userConsoleInput("mainMenu", input);
