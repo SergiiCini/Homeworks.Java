@@ -4,6 +4,7 @@ public class ConsoleMenu {
 
     public String consoleMainMenu() {
         return "\n\t\t\t\t\tMAIN MENU\n" +
+                "0. Load data from file.\n" +
                 "1. Create random families and save them to database.\n" +
                 "2. Show the list of all families.\n" +
                 "3. Show the list of families where the number of members are bigger then have entered.\n" +
@@ -13,6 +14,7 @@ public class ConsoleMenu {
                 "7. Delete the family by index list number.\n" +
                 "8. Edit the family by index list number.\n" +
                 "9. Delete children by older years parameter.\n" +
+                "10. Save data to file.\n" +
                 "exit";
     }
 

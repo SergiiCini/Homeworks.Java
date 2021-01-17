@@ -3,6 +3,7 @@ package app.console;
 import app.controller.FamilyController;
 import app.domain.*;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.*;
 
@@ -12,6 +13,14 @@ public class ConsoleCommands {
     private static final Map<String, Runnable> additionalCommands = new HashMap<>();
 
     public static void consoleCommand(FamilyController familyController) {
+        commands.put("0", () -> {
+            try {
+                familyController.getDataFromFile();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            System.out.println("All the data were loaded from file successful!");
+        });
         commands.put("1", () -> {
             try {
                 new RandomFamilyCreator(familyController).FamiliesCreator();
@@ -92,6 +101,15 @@ public class ConsoleCommands {
             System.out.println("Enter the age older then you want to delete children:");
             int childAgeToDelete = getNumber();
             familyController.deleteAllChildrenOlderThen(childAgeToDelete);
+        });
+
+        commands.put("10", () -> {
+            try {
+                familyController.saveDataToFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("All the data were saved into file successful!");
         });
 
         commands.put("exit", () -> {
@@ -180,7 +198,7 @@ public class ConsoleCommands {
     public static void userConsoleInput(String menuType, String userInput) {
         switch (menuType) {
             case "mainMenu": {
-                List<String> mainMenuItems = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "exit");
+                List<String> mainMenuItems = Arrays.asList("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "exit");
                 if (mainMenuItems.contains(userInput)) {
                     Runnable getMenuValue = commands.get(userInput);
                     getMenuValue.run();

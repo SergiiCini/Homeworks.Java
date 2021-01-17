@@ -1,8 +1,9 @@
 package app.domain;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Family {
+public class Family implements Serializable {
 
     private Human mother;
     private Human father;

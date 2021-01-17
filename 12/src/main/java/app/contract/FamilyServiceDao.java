@@ -4,6 +4,7 @@ import app.domain.Family;
 import app.domain.Human;
 import app.domain.Pet;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,4 +27,6 @@ public interface FamilyServiceDao {
     public Family getFamilyById(int familyIndex);
     public ArrayList<Pet> getPet(int familyIndex);
     public boolean addPet(int familyIndex, Pet pet);
+    public void getDataFromFile() throws IOException, ClassNotFoundException;
+    public void saveDataToFile() throws IOException, ClassNotFoundException;
 }

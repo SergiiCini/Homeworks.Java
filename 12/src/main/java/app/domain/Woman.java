@@ -1,9 +1,10 @@
 package app.domain;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.util.HashMap;
 
-public final class Woman extends Human {
+public final class Woman extends Human implements Serializable {
 
     private final String gender;
 

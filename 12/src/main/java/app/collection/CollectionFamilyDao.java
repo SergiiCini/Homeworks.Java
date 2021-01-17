@@ -2,6 +2,7 @@ package app.collection;
 
 import app.contract.FamilyDao;
 import app.domain.Family;
+import app.exceptions.FamilyOverflowException;
 import app.service.FileSystemService;
 
 import java.io.IOException;
@@ -12,6 +13,7 @@ public class CollectionFamilyDao implements FamilyDao {
 
     //List is working like a database
     private List<Family> familiesList;
+    String fileName = "families.bin";
 
     public CollectionFamilyDao() {
         this.familiesList = new ArrayList<>();
@@ -63,16 +65,31 @@ public class CollectionFamilyDao implements FamilyDao {
 
     @Override
     public void getDataFromFile() throws IOException, ClassNotFoundException {
-        FileSystemService fss = new FileSystemService();
-        Object receivedData = fss.getDataFromFile("families.bin");
-        if (receivedData instanceof List) {
-            familiesList = (List<Family>) receivedData;
+        try {
+            FileSystemService fss = new FileSystemService();
+            Object receivedData = fss.getDataFromFile(fileName);
+            if (receivedData instanceof List) {
+                familiesList = (List<Family>) receivedData;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new FamilyOverflowException("There is an error by loading " + fileName +
+                    " from hard disk.");
         }
     }
 
     @Override
     public void saveDataToFile() throws IOException {
+//        try {
+//            FileSystemService fss = new FileSystemService();
+//            fss.saveDataToFile(fileName, familiesList);
+//        } catch (IOException e) {
+//            throw new FamilyOverflowException("There is аn error by saving " + fileName +
+//                    " into hard disk.");
+//        }
+
         FileSystemService fss = new FileSystemService();
-        fss.saveDataToFile("families.bin", familiesList);
+        fss.saveDataToFile(fileName, familiesList);
     }
 }

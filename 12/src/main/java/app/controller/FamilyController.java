@@ -6,6 +6,7 @@ import app.domain.Human;
 import app.domain.Pet;
 import app.service.FamilyService;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -94,5 +95,15 @@ public class FamilyController implements FamilyServiceDao {
     @Override
     public boolean addPet(int familyIndex, Pet pet) {
         return familyService.addPet(familyIndex, pet);
+    }
+
+    @Override
+    public void getDataFromFile() throws IOException, ClassNotFoundException {
+        familyService.getDataFromFile();
+    }
+
+    @Override
+    public void saveDataToFile() throws IOException {
+        familyService.saveDataToFile();
     }
 }
